@@ -1,0 +1,58 @@
+:root {
+	--color-offer: #00876d;
+	--color-offer-bg: #d7f7ed;
+	--color-offer-text: #005745;
+
+	--color-request: #6959ae;
+	--color-request-bg: #eae8ff;
+	--color-request-text: #43337c;
+
+	--color-danger: #c92f33;
+	--color-danger-bg: #ffe7e4;
+	--color-fondo-marca: #1e1d1c;
+
+	/* Neutros */
+	--color-ink: #1c1b19;
+	--color-muted: #6b6a66;
+	--color-border: #e6e4df;
+	--color-surface: #ffffff;
+	--color-page: #f6f5f1;
+	--color-subtl: #f1efea;
+	/* Tipografía */
+	--font-heading: "Bricolage Grotesque", system-ui, sans-serif;
+	--font-body: "Figtree", system-ui, sans-serif;
+
+	/* Formas y sombras */
+	--radius-sm: 0.5rem;
+	--radius: 0.75rem;
+	--radius-lg: 1rem;
+	--radius-pill: 999px;
+	--shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+	--shadow: 0 4px 16px rgb(0 0 0 / 0.08);
+
+	/* Animaciones */
+	--transition: 150ms ease;
+
+	/* Bootstrap variables */
+	--bs-body-font-family: var(--font-body);
+	--bs-body-color: var(--color-ink);
+	--bs-body-bg: var(--color-page);
+	--bs-body-bg-rgb: 246, 245, 241;
+	--bs-secondary-color: var(--color-muted);
+	--bs-border-color: var(--color-border);
+	--bs-border-radius: var(--radius);
+	--bs-border-radius-sm: var(--radius-sm);
+	--bs-border-radius-lg: var(--radius-lg);
+	--bs-danger: var(--color-danger);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-heading);
+	font-weight: 800;
+	letter-spacing: -0.02em;
+}

@@ -1,0 +1,21 @@
+#brand-pannel{
+    background-color: var(--color-fondo-marca);
+}
+
+.login-box {
+    max-width: 29rem;
+}
+
+.form-check-input{
+    border-color: black;
+}
+
+.form-check-input:checked{
+    background-color:black;
+    border-color: black;
+}
+
+.btn .bi{
+    position: relative;
+    top: 2.3px;
+}

@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tándem · Mockup interactivo</title>
+<!--
+================================================================
+USO DE IA GENERATIVA · docs/mockup/index.html
+IA utilizada: Claude (Anthropic) · claude.ai · 21/10/2026 · Yeray
+================================================================
+1. Prompt: "basandote en la web hazme un mockup que cumpla los 5/5 de la rubrica"
+   Uso: diseño del mockup (pantallas, sistema visual, arquetipos, estructura e interacciones).
+2. Prompt: "Como puedes generarme esto para subirlo al git"
+   Uso: plantear cómo llevar el mockup al repositorio.
+3. Prompt: "pero necesito pasarle al profesor algo interactivo"
+   Uso: este archivo: versión navegable e interactiva del mockup, sin dependencias.
+================================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html, body { margin: 0; background: #e9e7e1; }
+.mk-bar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 8px 24px; flex-wrap: wrap;
+  padding: 12px 20px; background: #1e1d1c; color: #ffffff; font-family: 'Figtree', system-ui, sans-serif; }
+.mk-bar strong { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; }
+.mk-bar nav { display: flex; gap: 6px; flex-wrap: wrap; }
+.mk-bar nav a { color: #d6d4cd; text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 999px; border: 1px solid #4a4945; }
+.mk-bar nav a:hover { color: #ffffff; border-color: #ffffff; }
+.mk-bar nav a[aria-current="page"] { background: #ffffff; color: #1e1d1c; border-color: #ffffff; }
+.mk-bar span { font-size: 13px; color: #b9b7b0; }
+.mk-stage { overflow-x: auto; }
+</style>
+</head>
+<body>
+<header class="mk-bar">
+  <strong>Tándem · Mockup interactivo</strong>
+  <nav aria-label="Pantallas del mockup"><a href="#Main" data-board="Main">Sistema visual</a><a href="#Arquetipos" data-board="Arquetipos">Arquetipos</a><a href="#Estructura" data-board="Estructura">Estructura</a><a href="#Login" data-board="Login">Login</a><a href="#Dashboard" data-board="Dashboard">Tablón</a><a href="#Intercambios" data-board="Intercambios">Intercambios</a><a href="#Usuarios" data-board="Usuarios">Usuarios</a><a href="#Movil" data-board="Movil">Móvil</a></nav>
+  <span>Navega con los botones o con los enlaces de cada pantalla. En Login, Tablón, Intercambios y Usuarios hay controles que funcionan.</span>
+</header>
+<main id="stage" class="mk-stage"></main>
+<template id="css-Main">
+body{margin:0}
+a{color:#1c1b19}a:hover{color:#00876d}
+@keyframes fadeRow{0%{opacity:0}18%,82%{opacity:1}100%{opacity:0}}
+@keyframes toastIn{0%{opacity:0;transform:translateY(14px)}15%,80%{opacity:1;transform:none}100%{opacity:0;transform:translateY(14px)}}
+@keyframes hoverDark{0%,45%{background:#212529}55%,95%{background:#424649}100%{background:#212529}}
+@keyframes hoverLogout{0%,45%{background:#ffffff;color:#6b6a66;border-color:#e6e4df}55%,95%{background:#ffe7e4;color:#c92f33;border-color:#c92f33}100%{background:#ffffff;color:#6b6a66;border-color:#e6e4df}}
+@keyframes modalIn{0%{opacity:0;transform:translateY(-16px)}15%,85%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-16px)}}
+@keyframes menuOpen{0%,10%{max-height:0}30%,85%{max-height:120px}100%{max-height:0}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important}}
+</template><template id="css-Arquetipos">
+body{margin:0}
+a{color:#1c1b19}a:hover{color:#00876d}
+</template><template id="css-Estructura">
+body{margin:0}
+a{color:#1c1b19}a:hover{color:#00876d}
+</template><template id="css-Login">
+body{margin:0}
+a{color:#0b5ed7}a:hover{color:#084298}
+</template><template id="css-Dashboard">
+body{margin:0}
+a{color:#1c1b19}a:hover{color:#00876d}
+</template><template id="css-Intercambios">
+body{margin:0}
+a{color:#1c1b19}a:hover{color:#00876d}
+@keyframes aparecer{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important}}
+</template><template id="css-Usuarios">
+body{margin:0}
+a{color:#1c1b19}a:hover{color:#00876d}
+@keyframes modalIn{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:none}}
+@keyframes toastIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important}}
+</template><template id="css-Movil">
+body{margin:0}
+a{color:#0b5ed7}a:hover{color:#084298}
+</template>
+<template id="tpl-Main">
+
+<div style="width: 1440px; height: 1760px; box-sizing: border-box; padding: 64px 72px; background: #f6f5f1; font-family: 'Figtree', system-ui, sans-serif; color: #1c1b19; display: flex; flex-direction: column; gap: 44px">
+
+  <header style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap">
+    <svg width="66" height="44" viewBox="0 0 33 22" aria-hidden="true"><defs><clipPath id="lg-left"><circle cx="11" cy="11" r="10"></circle></clipPath></defs><circle cx="11" cy="11" r="10" fill="#00876d"></circle><circle cx="22" cy="11" r="10" fill="#6959ae"></circle><circle cx="22" cy="11" r="10" fill="#14284a" clip-path="url(#lg-left)"></circle></svg>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 44px; letter-spacing: -0.02em; line-height: 1.05">Tándem · sistema visual e interacciones</h1>
+      <p style="margin: 0; font-size: 17px; color: #6b6a66">Mockup de alta fidelidad del Producto 1 (FP.450), basado en la aplicación desarrollada con HTML5, Bootstrap 5.3 y JavaScript modular.</p>
+    </div>
+    <div style="margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap">
+      <span style="padding: 6px 12px; border-radius: 999px; background: #ffffff; border: 1px solid #e6e4df; font-size: 13px; font-weight: 600">Bootstrap 5.3</span>
+      <span style="padding: 6px 12px; border-radius: 999px; background: #ffffff; border: 1px solid #e6e4df; font-size: 13px; font-weight: 600">Webfonts</span>
+      <span style="padding: 6px 12px; border-radius: 999px; background: #ffffff; border: 1px solid #e6e4df; font-size: 13px; font-weight: 600">Variables CSS</span>
+    </div>
+  </header>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px">
+
+    <section style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 22px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -0.02em">Color</h2>
+      <p style="margin: 0; font-size: 14px; color: #6b6a66">Definidos como variables en <code>base.css</code> (<code>--color-offer</code>, <code>--color-request</code>…). Ofertas y peticiones se distinguen por color en todas las pantallas.</p>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px">
+        <template data-for="swatches" data-as="s">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 64px; border-radius: 12px; border: 1px solid #e6e4df; background: {{s.hex}}"></div>
+            <span style="font-size: 12px; font-weight: 600; line-height: 1.2">{{s.name}}</span>
+            <span style="font-size: 11px; color: #6b6a66; font-family: ui-monospace, Menlo, monospace">{{s.hex}}</span>
+          </div>
+        </template>
+      </div>
+
+      <h2 style="margin: 10px 0 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -0.02em">Tipografía</h2>
+      <div style="display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap">
+          <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 52px; letter-spacing: -0.02em; line-height: 1">Tablón</span>
+          <span style="font-size: 13px; color: #6b6a66">Bricolage Grotesque 800 · títulos h1–h6 · tracking −0,02 em</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap">
+          <span style="font-size: 18px; font-weight: 500">Encuentra con quién practicar.</span>
+          <span style="font-size: 13px; color: #6b6a66">Figtree 400–600 · texto, formularios y tablas</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap">
+          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66">Cabecera de tabla</span>
+          <span style="font-size: 13px; color: #6b6a66">Figtree 600 · 12 px · mayúsculas · +0,05 em</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 20px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -0.02em">Componentes y estados</h2>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66">Botón principal</span>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end">
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start"><button type="button" style="font: inherit; font-size: 15px; padding: 10px 18px; border-radius: 12px; border: 0; background: #212529; color: #ffffff">Publicar</button><span style="font-size: 12px; color: #6b6a66">Normal</span></div>
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start"><button type="button" style="font: inherit; font-size: 15px; padding: 10px 18px; border-radius: 12px; border: 0; background: #424649; color: #ffffff">Publicar</button><span style="font-size: 12px; color: #6b6a66">Hover</span></div>
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start"><button type="button" style="font: inherit; font-size: 15px; padding: 10px 18px; border-radius: 12px; border: 0; background: #212529; color: #ffffff; box-shadow: 0 0 0 4px rgba(33, 37, 41, 0.25)">Publicar</button><span style="font-size: 12px; color: #6b6a66">Foco (teclado)</span></div>
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start"><button type="button" disabled="disabled" style="font: inherit; font-size: 15px; padding: 10px 18px; border-radius: 12px; border: 0; background: #212529; color: #ffffff; opacity: 0.65">Publicar</button><span style="font-size: 12px; color: #6b6a66">Deshabilitado</span></div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66">Botones secundarios</span>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end">
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start"><button type="button" style="font: inherit; font-size: 15px; padding: 8px 14px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; color: #6b6a66">Salir</button><span style="font-size: 12px; color: #6b6a66">Salir · normal</span></div>
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start"><button type="button" style="font: inherit; font-size: 15px; padding: 8px 14px; border-radius: 12px; border: 1px solid #c92f33; background: #ffe7e4; color: #c92f33">Salir</button><span style="font-size: 12px; color: #6b6a66">Salir · hover</span></div>
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start"><button type="button" style="font: inherit; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 8px; border: 1px solid #e6e4df; background: #ffffff; color: #1c1b19">Contactar</button><span style="font-size: 12px; color: #6b6a66">Contactar · normal</span></div>
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start"><button type="button" style="font: inherit; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 8px; border: 1px solid #005745; background: #d7f7ed; color: #1c1b19">Contactar</button><span style="font-size: 12px; color: #6b6a66">Hover en oferta</span></div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66">Campos de formulario</span>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+          <div style="display: flex; flex-direction: column; gap: 6px"><label for="c-normal" style="font-size: 13px; font-weight: 600">Normal</label><input id="c-normal" type="email" placeholder="nombre@uni.es" style="font: inherit; font-size: 15px; padding: 9px 12px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; color: #1c1b19"></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><label for="c-focus" style="font-size: 13px; font-weight: 600">Foco</label><input id="c-focus" type="email" value="aina@uni.es" style="font: inherit; font-size: 15px; padding: 9px 12px; border-radius: 12px; border: 1px solid #86b7fe; background: #ffffff; color: #1c1b19; box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.25)"></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><label for="c-invalid" style="font-size: 13px; font-weight: 600">Inválido</label><input id="c-invalid" type="email" value="aina@uni" aria-invalid="true" style="font: inherit; font-size: 15px; padding: 9px 12px; border-radius: 12px; border: 1px solid #c92f33; background: #ffffff; color: #1c1b19"><span style="font-size: 13px; color: #c92f33">Escribe un email válido.</span></div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66">Etiquetas y usuario</span>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
+          <span style="padding: 4px 9px; border-radius: 6px; background: #00876d; color: #ffffff; font-size: 12px; font-weight: 700">Ofrezco</span>
+          <span style="padding: 4px 9px; border-radius: 6px; background: #6959ae; color: #ffffff; font-size: 12px; font-weight: 700">Busco</span>
+          <span style="padding: 5px 11px; border-radius: 999px; background: #00876d; color: #ffffff; font-size: 12px; font-weight: 700">Oferta</span>
+          <span style="padding: 5px 11px; border-radius: 999px; background: #6959ae; color: #ffffff; font-size: 12px; font-weight: 700">Petición</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 999px; background: #1c1b19; color: #ffffff; font-size: 12px; font-weight: 600"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"></path><path d="m9 12 2 2 4-4"></path></svg>Admin</span>
+          <span style="padding: 5px 11px; border-radius: 999px; background: #f1efea; color: #1c1b19; font-size: 12px; font-weight: 600">Estudiante</span>
+          <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 999px; border: 1px solid #e6e4df; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); font-size: 14px"><span style="width: 30px; height: 30px; border-radius: 999px; background: #000000; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600">DR</span>diego@uni.es</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section style="display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 30px; letter-spacing: -0.02em">Interacciones, transiciones y feedback</h2>
+      <span style="font-size: 14px; color: #6b6a66">Comportamientos implementados con JavaScript (listeners) y Bootstrap. Las animaciones se desactivan con <code>prefers-reduced-motion</code>.</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px">
+
+      <article style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 26px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">1</span><h3 style="margin: 0; font-size: 17px; font-weight: 700">Filtrado en vivo</h3></div>
+        <div style="height: 130px; border-radius: 12px; background: #f6f5f1; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; gap: 6px"><span style="padding: 4px 9px; border-radius: 4px; font-size: 12px; color: #1c1b19">Todos</span><span style="padding: 4px 9px; border-radius: 4px; font-size: 12px; background: #212529; color: #ffffff">Ofertas</span><span style="padding: 4px 9px; border-radius: 4px; font-size: 12px; color: #1c1b19">Peticiones</span></div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; flex: 1">
+            <div style="border-radius: 8px; background: #d7f7ed; border: 1px solid #b5e8d8; animation: fadeRow 4s ease infinite"></div>
+            <div style="border-radius: 8px; background: #d7f7ed; border: 1px solid #b5e8d8; animation: fadeRow 4s ease 0.15s infinite"></div>
+            <div style="border-radius: 8px; background: #d7f7ed; border: 1px solid #b5e8d8; animation: fadeRow 4s ease 0.3s infinite"></div>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #6b6a66; line-height: 1.45">Un único listener <code>input</code> en el formulario de filtros vuelve a pintar las tarjetas al cambiar tipo, idioma, nivel o modalidad. Respuesta inmediata.</p>
+      </article>
+
+      <article style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 26px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">2</span><h3 style="margin: 0; font-size: 17px; font-weight: 700">Aparición de filas</h3></div>
+        <div style="height: 130px; border-radius: 12px; background: #f6f5f1; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; align-items: center; gap: 8px; background: #ffffff; border-radius: 8px; padding: 7px 10px; animation: fadeRow 4s ease infinite"><span style="padding: 2px 8px; border-radius: 999px; background: #00876d; color: #ffffff; font-size: 11px; font-weight: 700">Oferta</span><span style="font-size: 12px">Alemán · Nativo</span></div>
+          <div style="display: flex; align-items: center; gap: 8px; background: #ffffff; border-radius: 8px; padding: 7px 10px; animation: fadeRow 4s ease 0.2s infinite"><span style="padding: 2px 8px; border-radius: 999px; background: #6959ae; color: #ffffff; font-size: 11px; font-weight: 700">Petición</span><span style="font-size: 12px">Inglés · B2</span></div>
+          <div style="display: flex; align-items: center; gap: 8px; background: #ffffff; border-radius: 8px; padding: 7px 10px; animation: fadeRow 4s ease 0.4s infinite"><span style="padding: 2px 8px; border-radius: 999px; background: #00876d; color: #ffffff; font-size: 11px; font-weight: 700">Oferta</span><span style="font-size: 12px">Francés · Nativo</span></div>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #6b6a66; line-height: 1.45">Al publicar o eliminar, <code>renderTable()</code> redibuja la tabla y las filas aparecen con un fundido de 0,4 s (<code>@keyframes aparecer</code>).</p>
+      </article>
+
+      <article style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 26px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">3</span><h3 style="margin: 0; font-size: 17px; font-weight: 700">Validación de formularios</h3></div>
+        <div style="height: 130px; border-radius: 12px; background: #f6f5f1; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; justify-content: center">
+          <div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; font-weight: 600">Email</span><span style="display: block; padding: 7px 10px; border-radius: 10px; border: 1px solid #c92f33; background: #ffffff; font-size: 13px">jonas@uni.es</span><span style="font-size: 12px; color: #c92f33">Ya existe un usuario con este email.</span></div>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #6b6a66; line-height: 1.45">Al enviar se marca <code>.is-invalid</code> con un mensaje concreto (vacío, formato o duplicado). El error desaparece en cuanto el usuario vuelve a escribir.</p>
+      </article>
+
+      <article style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 26px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">4</span><h3 style="margin: 0; font-size: 17px; font-weight: 700">Toast de confirmación</h3></div>
+        <div style="height: 130px; border-radius: 12px; background: #f6f5f1; padding: 12px; box-sizing: border-box; display: flex; align-items: flex-end; justify-content: flex-end">
+          <div role="status" style="display: flex; gap: 10px; align-items: flex-start; background: #212529; color: #ffffff; border-radius: 12px; padding: 12px 14px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08); max-width: 230px; animation: toastIn 4s ease infinite">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ddba9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg>
+            <span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 13px">Usuario creado</strong><span style="font-size: 12px; color: #dcdcdc">Marta Gil ya puede iniciar sesión.</span></span>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #6b6a66; line-height: 1.45">Alta y baja de usuarios confirmadas con un toast de Bootstrap (abajo a la derecha, <code>aria-live="polite"</code>, fundido de 150 ms, se oculta a los 5 s).</p>
+      </article>
+
+      <article style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 26px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">5</span><h3 style="margin: 0; font-size: 17px; font-weight: 700">Modal antes de borrar</h3></div>
+        <div style="height: 130px; border-radius: 12px; background: rgba(28, 27, 25, 0.45); padding: 12px; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+          <div style="background: #ffffff; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; width: 210px; animation: modalIn 4s ease infinite">
+            <strong style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 15px">¿Eliminar este usuario?</strong>
+            <div style="display: flex; justify-content: flex-end; gap: 6px"><span style="padding: 4px 10px; border-radius: 8px; border: 1px solid #e6e4df; font-size: 12px">Cancelar</span><span style="padding: 4px 10px; border-radius: 8px; background: #c92f33; color: #ffffff; font-size: 12px">Eliminar</span></div>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #6b6a66; line-height: 1.45">La papelera abre un modal con el nombre y el email del usuario. Evita bajas accidentales; entrada con fundido y desplazamiento (300 ms).</p>
+      </article>
+
+      <article style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 26px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">6</span><h3 style="margin: 0; font-size: 17px; font-weight: 700">Mostrar contraseña</h3></div>
+        <div style="height: 130px; border-radius: 12px; background: #f6f5f1; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; justify-content: center">
+          <div style="display: flex; border: 1px solid #e6e4df; border-radius: 10px; background: #ffffff; overflow: hidden"><span style="flex: 1; padding: 7px 10px; font-size: 13px; letter-spacing: 0.15em">••••••••</span><span style="padding: 6px 10px; border-left: 1px solid #e6e4df; display: inline-flex; align-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></span></div>
+          <div style="display: flex; border: 1px solid #e6e4df; border-radius: 10px; background: #ffffff; overflow: hidden"><span style="flex: 1; padding: 7px 10px; font-size: 13px">tandem2026</span><span style="padding: 6px 10px; border-left: 1px solid #e6e4df; display: inline-flex; align-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle><path d="M3 3l18 18"></path></svg></span></div>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #6b6a66; line-height: 1.45">El botón del ojo alterna <code>type="password"</code> ⇄ <code>text</code>, cambia el icono y actualiza el <code>aria-label</code> (Mostrar / Ocultar contraseña).</p>
+      </article>
+
+      <article style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 26px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">7</span><h3 style="margin: 0; font-size: 17px; font-weight: 700">Hover y foco</h3></div>
+        <div style="height: 130px; border-radius: 12px; background: #f6f5f1; padding: 12px; box-sizing: border-box; display: flex; gap: 12px; align-items: center; justify-content: center">
+          <span style="padding: 9px 16px; border-radius: 12px; color: #ffffff; font-size: 14px; animation: hoverDark 3s ease infinite">Publicar</span>
+          <span style="padding: 8px 14px; border-radius: 12px; border: 1px solid #e6e4df; font-size: 14px; animation: hoverLogout 3s ease infinite">Salir</span>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #6b6a66; line-height: 1.45">Botones con cambio de color y borde en hover y anillo de foco visible al navegar con teclado. Transición de 150 ms (<code>--transition</code>).</p>
+      </article>
+
+      <article style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 26px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">8</span><h3 style="margin: 0; font-size: 17px; font-weight: 700">Menú responsive</h3></div>
+        <div style="height: 130px; border-radius: 12px; background: #f6f5f1; padding: 12px; box-sizing: border-box; display: flex; justify-content: center">
+          <div style="width: 170px; background: #ffffff; border-radius: 10px; border: 1px solid #e6e4df; overflow: hidden; align-self: flex-start">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 10px"><span style="font-size: 13px; font-weight: 600">Tándem</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></div>
+            <div style="overflow: hidden; animation: menuOpen 4s ease infinite; max-height: 0">
+              <div style="padding: 4px 10px 10px; display: flex; flex-direction: column; gap: 6px; font-size: 12px"><span>Tablón</span><span>Intercambios</span><span>Usuarios</span><span style="color: #6b6a66">diego@uni.es · Salir</span></div>
+            </div>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #6b6a66; line-height: 1.45">Por debajo de 992 px la barra de navegación se pliega en un botón hamburguesa; al pulsarlo se despliega con la animación <em>collapse</em> de Bootstrap (350 ms).</p>
+      </article>
+
+    </div>
+  </section>
+</div>
+</template><template id="tpl-Arquetipos">
+
+<div style="width: 1440px; height: 1000px; box-sizing: border-box; padding: 60px 72px; background: #f6f5f1; font-family: 'Figtree', system-ui, sans-serif; color: #1c1b19; display: flex; flex-direction: column; gap: 32px">
+  <header style="display: flex; flex-direction: column; gap: 8px">
+    <h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -0.02em">Arquetipos de usuario</h1>
+    <p style="margin: 0; font-size: 16px; color: #6b6a66; max-width: 980px">Tres perfiles ficticios construidos a partir de los datos de ejemplo de <code>datos.js</code>. Cada uno justifica decisiones concretas de diseño en el tablón, la gestión de intercambios y la gestión de usuarios.</p>
+  </header>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; flex: 1">
+    <template data-for="personas" data-as="p">
+      <article style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column">
+        <header style="background: {{p.bg}}; color: {{p.text}}; padding: 24px 26px; display: flex; gap: 16px; align-items: center">
+          <span style="width: 64px; height: 64px; border-radius: 999px; background: {{p.main}}; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; flex-shrink: 0">{{p.initials}}</span>
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.02em">{{p.name}}</h2>
+            <span style="font-size: 14px; font-weight: 600">{{p.role}}</span>
+          </div>
+        </header>
+        <div style="padding: 22px 26px; display: flex; flex-direction: column; gap: 16px; flex: 1">
+          <p style="margin: 0; font-size: 16px; font-style: italic; line-height: 1.45">“{{p.quote}}”</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <template data-for="p.tags" data-as="t">
+              <span style="padding: 4px 10px; border-radius: 999px; background: #f1efea; font-size: 12px; font-weight: 600">{{t}}</span>
+            </template>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <h3 style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66">Objetivos</h3>
+            <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 1.4">
+              <template data-for="p.goals" data-as="g"><li>{{g}}</li></template>
+            </ul>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <h3 style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66">Frustraciones</h3>
+            <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 1.4">
+              <template data-for="p.pains" data-as="f"><li>{{f}}</li></template>
+            </ul>
+          </div>
+          <div style="margin-top: auto; border-top: 1px solid #e6e4df; padding-top: 14px; display: flex; flex-direction: column; gap: 8px">
+            <h3 style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66">Cómo le ayuda Tándem</h3>
+            <template data-for="p.solutions" data-as="s">
+              <div style="display: flex; gap: 10px; align-items: baseline; font-size: 14px; line-height: 1.4">
+                <span style="padding: 2px 8px; border-radius: 6px; background: {{p.main}}; color: #ffffff; font-size: 11px; font-weight: 700; flex-shrink: 0">{{s.screen}}</span>
+                <span>{{s.text}}</span>
+              </div>
+            </template>
+          </div>
+        </div>
+      </article>
+    </template>
+  </div>
+</div>
+</template><template id="tpl-Estructura">
+
+<div style="width: 1440px; height: 1000px; box-sizing: border-box; padding: 56px 72px; background: #f6f5f1; font-family: 'Figtree', system-ui, sans-serif; color: #1c1b19; display: flex; flex-direction: column; gap: 28px">
+  <header style="display: flex; flex-direction: column; gap: 8px">
+    <h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -0.02em">Estructura, módulos y flujo</h1>
+    <p style="margin: 0; font-size: 16px; color: #6b6a66">Organización del proyecto y buenas prácticas de separación entre estructura (HTML), presentación (CSS) y lógica (JavaScript).</p>
+  </header>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+
+    <section style="background: #1e1d1c; color: #ffffff; border-radius: 16px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Estructura de carpetas</h2>
+      <pre style="margin: 0; font-family: ui-monospace, Menlo, monospace; font-size: 13.5px; line-height: 1.7; white-space: pre; color: #ffffff">FullStack-UOC/
+├─ index.html       <span style="color: #b9b7b0">→ src/login.html</span>
+├─ src/
+│  ├─ login.html
+│  ├─ dashboard.html
+│  ├─ intercambios.html
+│  └─ usuarios.html
+├─ css/
+│  ├─ base.css      <span style="color: #b9b7b0">variables y tema</span>
+│  └─ 1 CSS por página
+├─ js/
+│  ├─ datos.js      <span style="color: #b9b7b0">datos de ejemplo</span>
+│  ├─ utils.js      <span style="color: #b9b7b0">funciones comunes</span>
+│  └─ 1 módulo por página
+├─ media/logo.svg
+└─ .gitignore       <span style="color: #b9b7b0">lista blanca</span></pre>
+    </section>
+
+    <section style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Separación HTML · CSS · JS</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <div style="border-radius: 12px; background: #f6f5f1; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+          <strong style="font-size: 15px">HTML · estructura</strong>
+          <span style="font-size: 14px; color: #6b6a66; line-height: 1.45">Etiquetas semánticas (<code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>template</code>), formularios con <code>label</code> y rejilla y componentes de Bootstrap. Sin JavaScript en línea.</span>
+        </div>
+        <div style="border-radius: 12px; background: #f6f5f1; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+          <strong style="font-size: 15px">CSS · presentación</strong>
+          <span style="font-size: 14px; color: #6b6a66; line-height: 1.45"><code>base.css</code> define la marca con variables y sobrescribe las de Bootstrap; cada página añade solo sus estilos y animaciones.</span>
+        </div>
+        <div style="border-radius: 12px; background: #f6f5f1; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+          <strong style="font-size: 15px">JS · lógica</strong>
+          <span style="font-size: 14px; color: #6b6a66; line-height: 1.45">Un módulo ES por página, eventos con <code>addEventListener</code>, render con <code>&lt;template&gt;</code> + <code>textContent</code> y datos en arrays de objetos en memoria.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 26px; display: flex; flex-direction: column; gap: 16px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Módulos JavaScript</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+        <div style="border-radius: 12px; border: 2px solid #00876d; background: #d7f7ed; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px"><strong style="font-family: ui-monospace, Menlo, monospace; font-size: 14px; color: #005745">datos.js</strong><span style="font-size: 12.5px; color: #005745">idiomas, niveles, modalidades, tipos, roles, intercambios, usuarios</span></div>
+        <div style="border-radius: 12px; border: 2px solid #6959ae; background: #eae8ff; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px"><strong style="font-family: ui-monospace, Menlo, monospace; font-size: 14px; color: #43337c">utils.js</strong><span style="font-size: 12.5px; color: #43337c">fillSelect, getLabel, getInitials, formatDate, nextId, showLoggedUser</span></div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 10px; color: #6b6a66; font-size: 13px; font-weight: 600">
+        <svg width="20" height="28" viewBox="0 0 20 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v22M3 17l7 7 7-7"></path></svg>
+        import (export modular)
+        <svg width="20" height="28" viewBox="0 0 20 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v22M3 17l7 7 7-7"></path></svg>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <template data-for="modules" data-as="m">
+          <div style="border-radius: 12px; border: 1px solid #e6e4df; padding: 10px 12px; display: flex; flex-direction: column; gap: 3px">
+            <strong style="font-family: ui-monospace, Menlo, monospace; font-size: 13.5px">{{m.file}}</strong>
+            <span style="font-size: 12.5px; color: #6b6a66">{{m.page}}</span>
+          </div>
+        </template>
+      </div>
+    </section>
+  </div>
+
+  <section style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 26px 28px; display: flex; flex-direction: column; gap: 18px">
+    <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Flujo de navegación</h2>
+    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap">
+      <div style="padding: 14px 18px; border-radius: 12px; background: #1e1d1c; color: #ffffff; display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 16px">Login</strong><span style="font-size: 12.5px; color: #d6d4cd">email + contraseña</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; color: #6b6a66"><span style="font-size: 12px">válidas · ?email=</span><svg width="70" height="16" viewBox="0 0 70 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h64M59 2l7 6-7 6"></path></svg></div>
+      <div style="padding: 14px 18px; border-radius: 12px; background: #d7f7ed; color: #005745; border: 1px solid #00876d; display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 16px">Tablón</strong><span style="font-size: 12.5px">ofertas y peticiones</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; color: #6b6a66"><span style="font-size: 12px">menú</span><svg width="70" height="16" viewBox="0 0 70 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h64M59 2l7 6-7 6M11 2 4 8l7 6"></path></svg></div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div style="padding: 12px 18px; border-radius: 12px; background: #eae8ff; color: #43337c; border: 1px solid #6959ae; display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 16px">Intercambios</strong><span style="font-size: 12.5px">publicar · ver · eliminar</span></div>
+        <div style="padding: 12px 18px; border-radius: 12px; background: #f1efea; color: #1c1b19; border: 1px solid #c9c6bd; display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 16px">Usuarios</strong><span style="font-size: 12.5px">alta · buscar · baja</span></div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; color: #6b6a66"><span style="font-size: 12px">Salir</span><svg width="70" height="16" viewBox="0 0 70 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h64M59 2l7 6-7 6"></path></svg></div>
+      <div style="padding: 14px 18px; border-radius: 12px; border: 1px dashed #6b6a66; display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 16px">Login</strong><span style="font-size: 12.5px; color: #6b6a66">sesión cerrada</span></div>
+      <p style="margin: 0 0 0 auto; max-width: 300px; font-size: 13px; color: #6b6a66; line-height: 1.45">Sin persistencia en el Producto 1: los datos viven en arrays en memoria y se reinician al recargar. El correo del usuario viaja en la URL.</p>
+    </div>
+  </section>
+</div>
+</template><template id="tpl-Login">
+
+<div style="width: 100%; font-family: 'Figtree', system-ui, sans-serif; color: #1c1b19; background: #f6f5f1; display: flex; flex-direction: column">
+  <div style="display: flex; flex-wrap: wrap; min-height: 900px">
+    <aside style="flex: 1 1 480px; background: #1e1d1c; color: #ffffff; padding: 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; min-height: 360px">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <svg width="33" height="22" viewBox="0 0 33 22" aria-hidden="true"><defs><clipPath id="lg-left"><circle cx="11" cy="11" r="10"></circle></clipPath></defs><circle cx="11" cy="11" r="10" fill="#00876d"></circle><circle cx="22" cy="11" r="10" fill="#6959ae"></circle><circle cx="22" cy="11" r="10" fill="#14284a" clip-path="url(#lg-left)"></circle></svg>
+        <span style="font-size: 18px; font-weight: 600">Tándem</span>
+      </div>
+      <div style="margin: auto 0; display: flex; flex-direction: column; gap: 22px">
+        <p style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 68px; line-height: 1.02; letter-spacing: -0.02em">Tú enseñas<br>el tuyo.<br>Yo, el mío.</p>
+        <p style="margin: 0; font-size: 20px; line-height: 1.5; color: #b9b7b0">El tablón de intercambio de idiomas de tu campus.<br>Publica lo que ofreces, encuentra lo que buscas.</p>
+      </div>
+    </aside>
+
+    <section style="flex: 1 1 480px; display: flex; align-items: center; justify-content: center; padding: 48px 24px; box-sizing: border-box">
+      <div style="width: 100%; max-width: 464px; display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 44px; letter-spacing: -0.02em">Inicia sesión</h1>
+          <p style="margin: 0; font-size: 16px">Usa tu email universitario.</p>
+        </div>
+
+        <form style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; align-items: center; gap: 8px">
+              <label for="l-email" style="font-size: 16px">Email</label>
+              <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">3</span>
+            </div>
+            <div style="display: flex; border: 1px solid {{emailBorder}}; border-radius: 12px; background: #ffffff; overflow: hidden">
+              <span style="padding: 0 14px; display: inline-flex; align-items: center; background: #f6f5f1; border-right: 1px solid #e6e4df"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg></span>
+              <input id="l-email" type="email" placeholder="nombre@uni.es" value="{{emailValue}}" style="flex: 1; min-width: 0; border: 0; padding: 12px 14px; font: inherit; font-size: 16px; background: transparent; color: #1c1b19; outline: none">
+            </div>
+            <template data-if="error"><span style="font-size: 14px; color: #c92f33">No hay ninguna cuenta con este email.</span></template>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+              <label for="l-pass" style="font-size: 16px">Contraseña</label>
+              <a href="#" style="font-size: 15px">¿Has olvidado tu contraseña?</a>
+            </div>
+            <div style="display: flex; border: 1px solid {{passBorder}}; border-radius: 12px; background: #ffffff; overflow: hidden">
+              <span style="padding: 0 14px; display: inline-flex; align-items: center; background: #f6f5f1; border-right: 1px solid #e6e4df"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span>
+              <input id="l-pass" type="{{passType}}" value="tandem2026" style="flex: 1; min-width: 0; border: 0; padding: 12px 14px; font: inherit; font-size: 16px; background: transparent; color: #1c1b19; outline: none">
+              <button type="button" onClick="{{toggleEye}}" aria-label="{{eyeLabel}}" style="border: 0; border-left: 1px solid #e6e4df; background: #ffffff; padding: 0 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; color: #1c1b19">
+                <template data-if="show"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle><path d="M3 3l18 18"></path></svg></template>
+                <template data-if="hidden"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></template>
+                <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">1</span>
+              </button>
+            </div>
+            <template data-if="error"><span style="font-size: 14px; color: #c92f33">Email o contraseña incorrectos.</span></template>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 10px">
+            <input id="l-keep" type="checkbox" style="width: 18px; height: 18px; margin: 0; accent-color: #000000">
+            <label for="l-keep" style="font-size: 16px">Mantener sesión iniciada</label>
+          </div>
+
+          <a href="#Dashboard" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 20px; border-radius: 16px; background: #212529; color: #ffffff; text-decoration: none; font-size: 20px">
+            Entrar
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">2</span>
+          </a>
+        </form>
+        <p style="margin: 0; text-align: center; font-size: 16px">¿Aún no tienes cuenta? <a href="#">Regístrate</a></p>
+      </div>
+    </section>
+  </div>
+
+  <section style="background: #1e1d1c; color: #ffffff; padding: 28px 48px 32px; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Interacciones de esta pantalla</h2>
+      <button type="button" onClick="{{toggleError}}" style="font: inherit; font-size: 14px; padding: 6px 14px; border-radius: 999px; border: 1px solid #6b6a66; background: transparent; color: #ffffff; cursor: pointer">{{errorButton}}</button>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+      <template data-for="notes" data-as="n">
+        <div style="display: flex; gap: 10px; align-items: flex-start">
+          <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0">{{n.n}}</span>
+          <span style="display: flex; flex-direction: column; gap: 3px"><strong style="font-size: 15px">{{n.title}}</strong><span style="font-size: 13.5px; line-height: 1.45; color: #d6d4cd">{{n.text}}</span></span>
+        </div>
+      </template>
+    </div>
+  </section>
+</div>
+</template><template id="tpl-Dashboard">
+
+<div style="width: 100%; font-family: 'Figtree', system-ui, sans-serif; color: #1c1b19; background: #f6f5f1; display: flex; flex-direction: column">
+
+  <header style="display: flex; align-items: center; gap: 12px 48px; flex-wrap: wrap; padding: 14px 32px; background: #ffffff; border-bottom: 1px solid #e6e4df">
+    <a href="#Dashboard" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1c1b19; font-size: 22px; font-weight: 500">
+      <svg width="33" height="22" viewBox="0 0 33 22" aria-hidden="true"><defs><clipPath id="lg-left"><circle cx="11" cy="11" r="10"></circle></clipPath></defs><circle cx="11" cy="11" r="10" fill="#00876d"></circle><circle cx="22" cy="11" r="10" fill="#6959ae"></circle><circle cx="22" cy="11" r="10" fill="#14284a" clip-path="url(#lg-left)"></circle></svg>
+      Tándem
+    </a>
+    <nav aria-label="Principal" style="display: flex; gap: 8px 32px; flex-wrap: wrap">
+      <a href="#Dashboard" aria-current="page" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #1c1b19; font-size: 17px; font-weight: 600; padding: 6px 0; border-bottom: 2px solid #1c1b19"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>Tablón</a>
+      <a href="#Intercambios" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #6b6a66; font-size: 17px; padding: 6px 0; border-bottom: 2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"></path></svg>Intercambios</a>
+      <a href="#Usuarios" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #6b6a66; font-size: 17px; padding: 6px 0; border-bottom: 2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M17.5 14.5c2 .4 3.5 2 4 4.5"></path></svg>Usuarios</a>
+    </nav>
+    <div style="margin-left: auto; display: flex; align-items: center; gap: 14px">
+      <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">4</span>
+      <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border-radius: 999px; border: 1px solid #e6e4df; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); font-size: 15px"><span style="width: 32px; height: 32px; border-radius: 999px; background: #000000; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">DR</span>diego@uni.es</span>
+      <a href="#Login" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 12px; border: 1px solid #e6e4df; color: #6b6a66; text-decoration: none; font-size: 16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M14 16l4-4-4-4M18 12H9"></path></svg>Salir</a>
+    </div>
+  </header>
+
+  <main style="padding: 32px 32px 40px; display: flex; flex-direction: column; gap: 22px; box-sizing: border-box">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -0.02em">Tablón</h1>
+        <p style="margin: 0; font-size: 16px; color: #6b6a66">Encuentra con quién practicar. {{offerCount}} ofertas y {{requestCount}} peticiones activas.</p>
+        <div style="display: flex; align-items: center; gap: 14px; font-size: 14px; color: #6b6a66">
+          <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">3</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 999px; background: #00876d"></span>Oferta</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 999px; background: #6959ae"></span>Petición</span>
+        </div>
+      </div>
+      <a href="#Intercambios" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 12px; background: #212529; color: #ffffff; text-decoration: none; font-size: 17px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Publicar intercambio</a>
+    </div>
+
+    <search style="display: block; background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 12px">
+      <form style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+        <fieldset style="border: 0; margin: 0; padding: 6px; border-radius: 12px; background: #f1efea; display: flex; align-items: center; gap: 4px">
+          <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Tipo de intercambio</legend>
+          <template data-for="pills" data-as="p">
+            <button type="button" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}" style="font: inherit; font-size: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; border: 0; cursor: pointer; background: {{p.bg}}; color: {{p.color}}">
+              <span style="width: 9px; height: 9px; border-radius: 999px; background: {{p.dot}}"></span>{{p.label}}
+            </button>
+          </template>
+          <span style="width: 22px; height: 22px; margin: 0 6px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">1</span>
+        </fieldset>
+
+        <div style="display: flex; align-items: center; gap: 8px; border: 1px solid #e6e4df; border-radius: 12px; padding: 0 12px; height: 46px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
+          <select aria-label="Idioma" style="font: inherit; font-size: 16px; border: 0; background: transparent; color: #1c1b19; padding: 0 4px"><option>Todos los idiomas</option><option>Alemán</option><option>Inglés</option></select>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; border: 1px solid #e6e4df; border-radius: 12px; padding: 0 12px; height: 46px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 20v-5M10 20V10M15 20V6M20 20V3"></path></svg>
+          <select aria-label="Nivel" style="font: inherit; font-size: 16px; border: 0; background: transparent; color: #1c1b19; padding: 0 4px"><option>Todos los niveles</option><option>B1</option><option>Nativo</option></select>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; border: 1px solid #e6e4df; border-radius: 12px; padding: 0 12px; height: 46px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"></path><circle cx="12" cy="10" r="2.3"></circle></svg>
+          <select aria-label="Modalidad" style="font: inherit; font-size: 16px; border: 0; background: transparent; color: #1c1b19; padding: 0 4px"><option>Modalidad</option><option>Presencial</option><option>Online</option></select>
+        </div>
+        <div style="flex: 1 1 260px; display: flex; align-items: center; gap: 10px; border: 1px solid #e6e4df; border-radius: 12px; padding: 0 14px; height: 46px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg>
+          <input type="search" aria-label="Buscar" placeholder="Buscar por nombre o facultad" style="flex: 1; min-width: 0; border: 0; font: inherit; font-size: 16px; background: transparent; color: #1c1b19; outline: none">
+          <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">2</span>
+        </div>
+      </form>
+    </search>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 24px">
+      <template data-for="cards" data-as="c">
+        <article style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column">
+          <header style="background: {{c.bg}}; color: {{c.text}}; padding: 18px 20px 16px; border-bottom: 1px solid #e6e4df">
+            <div style="display: flex; align-items: center; justify-content: space-between">
+              <span style="padding: 4px 9px; border-radius: 6px; background: {{c.main}}; color: #ffffff; font-size: 12px; font-weight: 700">{{c.typeLabel}}</span>
+              <time style="font-size: 14px; color: #5a5955">{{c.date}}</time>
+            </div>
+            <h2 style="margin: 10px 0 0; display: flex; align-items: baseline; gap: 10px"><span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 32px; letter-spacing: -0.02em">{{c.language}}</span><span style="font-size: 13px; font-weight: 500">{{c.level}}</span></h2>
+          </header>
+          <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+            <p style="margin: 0; display: flex; align-items: center; gap: 6px; font-size: 14px; color: #6b6a66"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"></path></svg>A cambio de <strong style="color: #1c1b19; font-size: 16px">{{c.exchange}}</strong></p>
+            <p style="margin: 0; font-size: 16px; line-height: 1.5">{{c.description}}</p>
+            <p style="margin: auto 0 0; display: flex; gap: 18px; font-size: 14px; color: #6b6a66">
+              <span style="display: inline-flex; align-items: center; gap: 5px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"></path><circle cx="12" cy="10" r="2.3"></circle></svg>{{c.modality}}</span>
+              <span style="display: inline-flex; align-items: center; gap: 5px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>{{c.availability}}</span>
+            </p>
+          </div>
+          <footer style="border-top: 1px solid #e6e4df; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <span style="width: 38px; height: 38px; border-radius: 999px; background: {{c.bg}}; color: {{c.text}}; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">{{c.initials}}</span>
+              <span style="display: flex; flex-direction: column"><span style="font-size: 16px">{{c.name}}</span><span style="font-size: 14px; color: #6b6a66">{{c.faculty}}</span></span>
+            </div>
+            <button type="button" style="font: inherit; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; border: 1px solid #e6e4df; background: #ffffff; color: #1c1b19; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path></svg>Contactar</button>
+          </footer>
+        </article>
+      </template>
+    </div>
+  </main>
+
+  <section style="background: #1e1d1c; color: #ffffff; padding: 28px 32px 32px; display: flex; flex-direction: column; gap: 16px">
+    <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Interacciones de esta pantalla</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px">
+      <template data-for="notes" data-as="n">
+        <div style="display: flex; gap: 10px; align-items: flex-start">
+          <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0">{{n.n}}</span>
+          <span style="display: flex; flex-direction: column; gap: 3px"><strong style="font-size: 15px">{{n.title}}</strong><span style="font-size: 13.5px; line-height: 1.45; color: #d6d4cd">{{n.text}}</span></span>
+        </div>
+      </template>
+    </div>
+  </section>
+</div>
+</template><template id="tpl-Intercambios">
+
+<div style="width: 100%; font-family: 'Figtree', system-ui, sans-serif; color: #1c1b19; background: #f6f5f1; display: flex; flex-direction: column">
+
+  <header style="display: flex; align-items: center; gap: 12px 48px; flex-wrap: wrap; padding: 14px 32px; background: #ffffff; border-bottom: 1px solid #e6e4df">
+    <a href="#Dashboard" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1c1b19; font-size: 22px; font-weight: 500">
+      <svg width="33" height="22" viewBox="0 0 33 22" aria-hidden="true"><defs><clipPath id="lg-left"><circle cx="11" cy="11" r="10"></circle></clipPath></defs><circle cx="11" cy="11" r="10" fill="#00876d"></circle><circle cx="22" cy="11" r="10" fill="#6959ae"></circle><circle cx="22" cy="11" r="10" fill="#14284a" clip-path="url(#lg-left)"></circle></svg>
+      Tándem
+    </a>
+    <nav aria-label="Principal" style="display: flex; gap: 8px 32px; flex-wrap: wrap">
+      <a href="#Dashboard" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #6b6a66; font-size: 17px; padding: 6px 0; border-bottom: 2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>Tablón</a>
+      <a href="#Intercambios" aria-current="page" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #1c1b19; font-size: 17px; font-weight: 600; padding: 6px 0; border-bottom: 2px solid #1c1b19"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"></path></svg>Intercambios</a>
+      <a href="#Usuarios" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #6b6a66; font-size: 17px; padding: 6px 0; border-bottom: 2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M17.5 14.5c2 .4 3.5 2 4 4.5"></path></svg>Usuarios</a>
+    </nav>
+    <div style="margin-left: auto; display: flex; align-items: center; gap: 14px">
+      <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border-radius: 999px; border: 1px solid #e6e4df; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); font-size: 15px"><span style="width: 32px; height: 32px; border-radius: 999px; background: #000000; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">DR</span>diego@uni.es</span>
+      <a href="#Login" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 12px; border: 1px solid #e6e4df; color: #6b6a66; text-decoration: none; font-size: 16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M14 16l4-4-4-4M18 12H9"></path></svg>Salir</a>
+    </div>
+  </header>
+
+  <main style="padding: 32px 32px 40px; display: flex; flex-direction: column; gap: 24px; box-sizing: border-box">
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -0.02em">Intercambios</h1>
+      <p style="margin: 0; font-size: 16px; color: #6b6a66">Publica una oferta o una petición y gestiona las que ya tienes.</p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+      <section style="flex: 1 1 340px; max-width: 460px; background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+        <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Nuevo intercambio</h2>
+        <form style="display: flex; flex-direction: column; gap: 18px">
+          <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+            <legend style="font-size: 14px; font-weight: 600; padding: 0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px">Tipo <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">4</span></legend>
+            <div style="display: flex; gap: 8px">
+              <template data-for="types" data-as="t">
+                <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="flex: 1; font: inherit; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 12px; border-radius: 12px; border: 1px solid #212529; cursor: pointer; background: {{t.bg}}; color: {{t.color}}"><span style="width: 9px; height: 9px; border-radius: 999px; background: {{t.dot}}"></span>{{t.label}}</button>
+              </template>
+            </div>
+          </fieldset>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+            <div style="display: flex; flex-direction: column; gap: 8px"><label for="i-lang" style="font-size: 14px; font-weight: 600">Idioma</label><select id="i-lang" style="font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; color: #1c1b19"><option>Inglés</option><option>Alemán</option><option>Francés</option></select></div>
+            <div style="display: flex; flex-direction: column; gap: 8px"><label for="i-level" style="font-size: 14px; font-weight: 600">Nivel</label><select id="i-level" style="font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; color: #1c1b19"><option>B1</option><option>B2</option><option>Nativo</option></select></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px"><label for="i-exchange" style="font-size: 14px; font-weight: 600">A cambio de</label><select id="i-exchange" style="font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; color: #1c1b19"><option>Español</option><option>Catalán</option><option>Italiano</option></select></div>
+          <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+            <legend style="font-size: 14px; font-weight: 600; padding: 0; margin-bottom: 8px">Modalidad</legend>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap">
+              <template data-for="modalities" data-as="m">
+                <button type="button" onClick="{{m.pick}}" aria-pressed="{{m.pressed}}" style="font: inherit; font-size: 16px; padding: 8px 16px; border-radius: 999px; border: 1px solid #212529; cursor: pointer; background: {{m.bg}}; color: {{m.color}}">{{m.label}}</button>
+              </template>
+            </div>
+          </fieldset>
+          <div style="display: flex; flex-direction: column; gap: 8px"><label for="i-desc" style="font-size: 14px; font-weight: 600">Descripción</label><textarea id="i-desc" rows="3" placeholder="Cuéntale a los demás qué te gustaría hacer…" style="font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; color: #1c1b19; resize: vertical"></textarea></div>
+          <button type="button" onClick="{{publish}}" style="font: inherit; font-size: 17px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border-radius: 12px; border: 0; background: #212529; color: #ffffff; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"></path></svg>Publicar<span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">1</span></button>
+        </form>
+      </section>
+
+      <section style="flex: 999 1 560px; min-width: 0; background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; overflow: hidden">
+        <header style="padding: 18px 24px; border-bottom: 1px solid #e6e4df; display: flex; align-items: center; gap: 10px">
+          <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Intercambios publicados</h2>
+          <span style="padding: 3px 10px; border-radius: 999px; background: #f1efea; font-size: 13px; font-weight: 700">{{count}}</span>
+          <span style="width: 22px; height: 22px; margin-left: auto; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">3</span>
+        </header>
+        <div style="overflow-x: auto; position: relative">
+          <table style="width: 100%; border-collapse: collapse; font-size: 16px">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align: left; padding: 12px 12px 12px 24px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">Tipo</th>
+                <th scope="col" style="text-align: left; padding: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">Idioma</th>
+                <th scope="col" style="text-align: left; padding: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">Nivel</th>
+                <th scope="col" style="text-align: left; padding: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">A cambio de</th>
+                <th scope="col" style="text-align: left; padding: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">Modalidad</th>
+                <th scope="col" style="text-align: left; padding: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">Publicado</th>
+                <th scope="col" style="padding: 12px 24px 12px 12px; border-bottom: 1px solid #e6e4df"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <template data-for="rows" data-as="r">
+                <tr style="animation: aparecer 0.4s">
+                  <td style="padding: 12px 12px 12px 24px; border-bottom: 1px solid #e6e4df"><span style="padding: 5px 11px; border-radius: 999px; background: {{r.main}}; color: #ffffff; font-size: 12px; font-weight: 700">{{r.typeLabel}}</span></td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e6e4df">{{r.language}}</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e6e4df">{{r.level}}</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e6e4df">{{r.exchange}}</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e6e4df">{{r.modality}}</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e6e4df; color: #6b6a66">{{r.date}}</td>
+                  <td style="padding: 12px 24px 12px 12px; border-bottom: 1px solid #e6e4df; text-align: right"><button type="button" onClick="{{r.remove}}" style="font: inherit; font-size: 14px; padding: 5px 12px; border-radius: 8px; border: 1px solid #c92f33; background: #ffffff; color: #c92f33; cursor: pointer">Eliminar</button></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin: 0; padding: 14px 24px; font-size: 13.5px; color: #6b6a66; display: flex; align-items: center; gap: 8px"><span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">2</span>Pulsa Eliminar o Publicar para ver cómo cambia la tabla.</p>
+      </section>
+    </div>
+  </main>
+
+  <section style="background: #1e1d1c; color: #ffffff; padding: 28px 32px 32px; display: flex; flex-direction: column; gap: 16px">
+    <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Interacciones de esta pantalla</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+      <template data-for="notes" data-as="n">
+        <div style="display: flex; gap: 10px; align-items: flex-start">
+          <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0">{{n.n}}</span>
+          <span style="display: flex; flex-direction: column; gap: 3px"><strong style="font-size: 15px">{{n.title}}</strong><span style="font-size: 13.5px; line-height: 1.45; color: #d6d4cd">{{n.text}}</span></span>
+        </div>
+      </template>
+    </div>
+  </section>
+</div>
+</template><template id="tpl-Usuarios">
+
+<div style="position: relative; width: 100%; font-family: 'Figtree', system-ui, sans-serif; color: #1c1b19; background: #f6f5f1; display: flex; flex-direction: column">
+
+  <header style="display: flex; align-items: center; gap: 12px 48px; flex-wrap: wrap; padding: 14px 32px; background: #ffffff; border-bottom: 1px solid #e6e4df">
+    <a href="#Dashboard" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1c1b19; font-size: 22px; font-weight: 500">
+      <svg width="33" height="22" viewBox="0 0 33 22" aria-hidden="true"><defs><clipPath id="lg-left"><circle cx="11" cy="11" r="10"></circle></clipPath></defs><circle cx="11" cy="11" r="10" fill="#00876d"></circle><circle cx="22" cy="11" r="10" fill="#6959ae"></circle><circle cx="22" cy="11" r="10" fill="#14284a" clip-path="url(#lg-left)"></circle></svg>
+      Tándem
+    </a>
+    <nav aria-label="Principal" style="display: flex; gap: 8px 32px; flex-wrap: wrap">
+      <a href="#Dashboard" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #6b6a66; font-size: 17px; padding: 6px 0; border-bottom: 2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>Tablón</a>
+      <a href="#Intercambios" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #6b6a66; font-size: 17px; padding: 6px 0; border-bottom: 2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"></path></svg>Intercambios</a>
+      <a href="#Usuarios" aria-current="page" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #1c1b19; font-size: 17px; font-weight: 600; padding: 6px 0; border-bottom: 2px solid #1c1b19"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M17.5 14.5c2 .4 3.5 2 4 4.5"></path></svg>Usuarios</a>
+    </nav>
+    <div style="margin-left: auto; display: flex; align-items: center; gap: 14px">
+      <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border-radius: 999px; border: 1px solid #e6e4df; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); font-size: 15px"><span style="width: 32px; height: 32px; border-radius: 999px; background: #000000; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">DR</span>diego@uni.es</span>
+      <a href="#Login" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 12px; border: 1px solid #e6e4df; color: #6b6a66; text-decoration: none; font-size: 16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M14 16l4-4-4-4M18 12H9"></path></svg>Salir</a>
+    </div>
+  </header>
+
+  <main style="padding: 32px 32px 40px; display: flex; flex-direction: column; gap: 24px; box-sizing: border-box">
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -0.02em">Usuarios</h1>
+      <p style="margin: 0; font-size: 16px; color: #6b6a66">Da de alta nuevos miembros y gestiona las cuentas existentes.</p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+      <section style="flex: 1 1 340px; max-width: 460px; background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+        <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Nuevo usuario</h2>
+        <form style="display: flex; flex-direction: column; gap: 16px">
+          <div style="display: flex; flex-direction: column; gap: 8px"><label for="u-name" style="font-size: 14px; font-weight: 600">Nombre completo</label><input id="u-name" type="text" value="Marta Gil" style="font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; color: #1c1b19"></div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <label for="u-email" style="font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px">Email <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">1</span></label>
+            <div style="display: flex; border: 1px solid #c92f33; border-radius: 12px; background: #ffffff; overflow: hidden"><span style="padding: 0 12px; display: inline-flex; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg></span><input id="u-email" type="email" value="marta@uni" aria-invalid="true" aria-describedby="u-email-error" style="flex: 1; min-width: 0; border: 0; padding: 10px 12px 10px 0; font: inherit; font-size: 16px; background: transparent; color: #1c1b19; outline: none"></div>
+            <span id="u-email-error" style="font-size: 14px; color: #c92f33">Escribe un email válido.</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px"><label for="u-pass" style="font-size: 14px; font-weight: 600">Contraseña</label><div style="display: flex; border: 1px solid #e6e4df; border-radius: 12px; background: #ffffff; overflow: hidden"><span style="padding: 0 12px; display: inline-flex; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span><input id="u-pass" type="password" value="tandem2026" style="flex: 1; min-width: 0; border: 0; padding: 10px 12px 10px 0; font: inherit; font-size: 16px; background: transparent; color: #1c1b19; outline: none"></div></div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+            <div style="display: flex; flex-direction: column; gap: 8px"><label for="u-lang" style="font-size: 14px; font-weight: 600">Idioma nativo</label><select id="u-lang" style="font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; color: #1c1b19"><option>Español</option><option>Catalán</option><option>Inglés</option></select></div>
+            <div style="display: flex; flex-direction: column; gap: 8px"><label for="u-role" style="font-size: 14px; font-weight: 600">Rol</label><select id="u-role" style="font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; color: #1c1b19"><option>Estudiante</option><option>Admin</option></select></div>
+          </div>
+          <button type="button" onClick="{{create}}" style="font: inherit; font-size: 17px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border-radius: 12px; border: 0; background: #212529; color: #ffffff; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M19 8v6M16 11h6"></path></svg>Crear usuario</button>
+        </form>
+      </section>
+
+      <section style="flex: 999 1 560px; min-width: 0; background: #ffffff; border: 1px solid #e6e4df; border-radius: 16px; overflow: hidden">
+        <header style="padding: 16px 24px; border-bottom: 1px solid #e6e4df; display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Usuarios registrados</h2>
+          <span style="padding: 3px 10px; border-radius: 999px; background: #f1efea; font-size: 13px; font-weight: 700">{{count}}</span>
+          <div style="margin-left: auto; display: flex; align-items: center; gap: 10px">
+            <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">3</span>
+            <div style="display: flex; align-items: center; gap: 8px; border: 1px solid #e6e4df; border-radius: 12px; padding: 0 12px; height: 42px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg><input type="search" aria-label="Buscar usuario" placeholder="Buscar usuario" style="border: 0; font: inherit; font-size: 15px; background: transparent; color: #1c1b19; outline: none; width: 160px"></div>
+          </div>
+        </header>
+        <div style="overflow-x: auto; position: relative">
+          <table style="width: 100%; border-collapse: collapse; font-size: 16px">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align: left; padding: 12px 12px 12px 24px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">Usuario</th>
+                <th scope="col" style="text-align: left; padding: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">Email</th>
+                <th scope="col" style="text-align: left; padding: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">Nativo</th>
+                <th scope="col" style="text-align: left; padding: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">Rol</th>
+                <th scope="col" style="text-align: left; padding: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #6b6a66; border-bottom: 1px solid #e6e4df">Alta</th>
+                <th scope="col" style="padding: 12px 24px 12px 12px; border-bottom: 1px solid #e6e4df"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <template data-for="rows" data-as="u">
+                <tr>
+                  <td style="padding: 12px 12px 12px 24px; border-bottom: 1px solid #e6e4df"><span style="display: flex; align-items: center; gap: 10px"><span style="width: 36px; height: 36px; border-radius: 999px; background: #f1efea; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0">{{u.initials}}</span><span style="font-weight: 600">{{u.name}}</span></span></td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e6e4df">{{u.email}}</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e6e4df">{{u.native}}</td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e6e4df"><span style="padding: 5px 11px; border-radius: 999px; background: {{u.roleBg}}; color: {{u.roleColor}}; font-size: 12px; font-weight: 600">{{u.role}}</span></td>
+                  <td style="padding: 12px; border-bottom: 1px solid #e6e4df; color: #6b6a66">{{u.date}}</td>
+                  <td style="padding: 12px 24px 12px 12px; border-bottom: 1px solid #e6e4df; text-align: right"><button type="button" onClick="{{u.ask}}" aria-label="{{u.deleteLabel}}" style="padding: 7px 9px; border-radius: 8px; border: 1px solid #e6e4df; background: #ffffff; color: #c92f33; cursor: pointer; display: inline-flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></button></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin: 0; padding: 14px 24px; font-size: 13.5px; color: #6b6a66; display: flex; align-items: center; gap: 8px"><span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">2</span>Pulsa una papelera para ver el modal de confirmación y el toast.</p>
+      </section>
+    </div>
+  </main>
+
+  <section style="background: #1e1d1c; color: #ffffff; padding: 28px 32px 32px; display: flex; flex-direction: column; gap: 16px">
+    <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px">Interacciones de esta pantalla</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+      <template data-for="notes" data-as="n">
+        <div style="display: flex; gap: 10px; align-items: flex-start">
+          <span style="width: 22px; height: 22px; border-radius: 999px; background: #c2410c; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0">{{n.n}}</span>
+          <span style="display: flex; flex-direction: column; gap: 3px"><strong style="font-size: 15px">{{n.title}}</strong><span style="font-size: 13.5px; line-height: 1.45; color: #d6d4cd">{{n.text}}</span></span>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <template data-if="modalOpen">
+    <div style="position: fixed; inset: 0; z-index: 60; background: rgba(28, 27, 25, 0.5); display: flex; align-items: center; justify-content: center">
+      <div role="dialog" aria-modal="true" aria-labelledby="del-title" style="width: 480px; max-width: calc(100% - 32px); background: #ffffff; border-radius: 16px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; animation: modalIn 0.3s ease-out">
+        <span style="width: 56px; height: 56px; border-radius: 12px; background: #ffe7e4; color: #c92f33; display: inline-flex; align-items: center; justify-content: center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></span>
+        <h2 id="del-title" style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 26px">¿Eliminar este usuario?</h2>
+        <p style="margin: 0; font-size: 16px; color: #6b6a66; line-height: 1.5"><strong style="color: #1c1b19">{{pendingName}}</strong> ({{pendingEmail}}) dejará de tener acceso. Esta acción no se puede deshacer.</p>
+        <div style="display: flex; justify-content: flex-end; gap: 10px">
+          <button type="button" onClick="{{cancel}}" style="font: inherit; font-size: 16px; padding: 10px 22px; border-radius: 12px; border: 1px solid #6b6a66; background: #ffffff; color: #1c1b19; cursor: pointer">Cancelar</button>
+          <button type="button" onClick="{{confirm}}" style="font: inherit; font-size: 16px; padding: 10px 22px; border-radius: 12px; border: 0; background: #c92f33; color: #ffffff; cursor: pointer">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template data-if="toastOpen">
+    <div role="status" aria-live="polite" style="position: fixed; z-index: 60; right: 24px; bottom: 24px; width: 380px; display: flex; gap: 12px; align-items: flex-start; background: #212529; color: #ffffff; border-radius: 12px; padding: 16px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08); animation: toastIn 0.25s ease-out">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3ddba9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg>
+      <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 15px">{{toastTitle}}</strong><span style="font-size: 14px; color: #dcdcdc">{{toastText}}</span></span>
+      <button type="button" onClick="{{closeToast}}" aria-label="Cerrar" style="border: 0; background: transparent; color: #ffffff; cursor: pointer; padding: 2px; display: inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+    </div>
+  </template>
+</div>
+</template><template id="tpl-Movil">
+
+<div style="width: 1440px; height: 1080px; box-sizing: border-box; padding: 48px 72px; background: #f6f5f1; font-family: 'Figtree', system-ui, sans-serif; color: #1c1b19; display: flex; flex-direction: column; gap: 28px">
+  <header style="display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap">
+    <h1 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 36px; letter-spacing: -0.02em">Versión móvil</h1>
+    <p style="margin: 0; font-size: 15px; color: #6b6a66">Bootstrap colapsa la navegación por debajo de 992 px, la rejilla pasa a una columna y las tablas hacen scroll dentro de su caja.</p>
+  </header>
+
+  <div style="display: flex; gap: 72px; justify-content: center">
+
+    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center">
+      <span style="font-size: 15px; font-weight: 600">Login</span>
+      <div style="width: 390px; height: 844px; box-sizing: border-box; border: 10px solid #1c1b19; border-radius: 48px; overflow: hidden; background: #f6f5f1; display: flex; flex-direction: column; padding: 56px 24px 24px; gap: 22px">
+        <div style="display: flex; align-items: center; gap: 8px"><svg width="33" height="22" viewBox="0 0 33 22" aria-hidden="true"><defs><clipPath id="lg-left"><circle cx="11" cy="11" r="10"></circle></clipPath></defs><circle cx="11" cy="11" r="10" fill="#00876d"></circle><circle cx="22" cy="11" r="10" fill="#6959ae"></circle><circle cx="22" cy="11" r="10" fill="#14284a" clip-path="url(#lg-left)"></circle></svg><span style="font-size: 18px; font-weight: 600">Tándem</span></div>
+        <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 40px"><h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 34px; letter-spacing: -0.02em">Inicia sesión</h2><p style="margin: 0; font-size: 15px">Usa tu email universitario.</p></div>
+        <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 15px">Email</span><span style="display: block; padding: 12px 14px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; font-size: 15px; color: #6b6a66">nombre@uni.es</span></div>
+        <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 15px">Contraseña</span><span style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-radius: 12px; border: 1px solid #e6e4df; background: #ffffff; font-size: 15px; letter-spacing: 0.15em">••••••••<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></span></div>
+        <span style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; border-radius: 16px; background: #212529; color: #ffffff; font-size: 18px">Entrar<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+        <p style="margin: 0; text-align: center; font-size: 15px">¿Aún no tienes cuenta? <a href="#">Regístrate</a></p>
+      </div>
+      <span style="font-size: 13px; color: #6b6a66; max-width: 360px; text-align: center">El panel de marca se oculta (d-none d-lg-flex).</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center">
+      <span style="font-size: 15px; font-weight: 600">Tablón · menú desplegado</span>
+      <div style="width: 390px; height: 844px; box-sizing: border-box; border: 10px solid #1c1b19; border-radius: 48px; overflow: hidden; background: #f6f5f1; display: flex; flex-direction: column">
+        <div style="background: #ffffff; border-bottom: 1px solid #e6e4df; padding: 40px 18px 14px; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; align-items: center; justify-content: space-between"><span style="display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 500"><svg width="33" height="22" viewBox="0 0 33 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#00876d"></circle><circle cx="22" cy="11" r="10" fill="#6959ae"></circle><circle cx="22" cy="11" r="10" fill="#14284a" clip-path="url(#lg-left)"></circle></svg>Tándem</span><span style="padding: 6px 9px; border-radius: 10px; border: 1px solid #1c1b19; display: inline-flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></span></div>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 16px"><span style="font-weight: 600">Tablón</span><span style="color: #6b6a66">Intercambios</span><span style="color: #6b6a66">Usuarios</span></div>
+          <div style="display: flex; align-items: center; gap: 10px"><span style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 5px; border-radius: 999px; border: 1px solid #e6e4df; font-size: 14px"><span style="width: 28px; height: 28px; border-radius: 999px; background: #000000; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600">DR</span>diego@uni.es</span><span style="padding: 6px 12px; border-radius: 12px; border: 1px solid #e6e4df; color: #6b6a66; font-size: 14px">Salir</span></div>
+        </div>
+        <div style="padding: 18px; display: flex; flex-direction: column; gap: 14px">
+          <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 30px; letter-spacing: -0.02em">Tablón</h2>
+          <div style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 14px; padding: 8px; display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; gap: 4px; background: #f1efea; border-radius: 10px; padding: 4px"><span style="flex: 1; text-align: center; padding: 7px; border-radius: 7px; background: #212529; color: #ffffff; font-size: 14px">Todos</span><span style="flex: 1; text-align: center; padding: 7px; font-size: 14px">Ofertas</span><span style="flex: 1; text-align: center; padding: 7px; font-size: 14px">Peticiones</span></div>
+            <span style="padding: 9px 12px; border: 1px solid #e6e4df; border-radius: 10px; font-size: 14px">Todos los idiomas</span>
+            <span style="padding: 9px 12px; border: 1px solid #e6e4df; border-radius: 10px; font-size: 14px; color: #6b6a66">Buscar por nombre o facultad</span>
+          </div>
+          <div style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 14px; overflow: hidden">
+            <div style="background: #d7f7ed; color: #005745; padding: 14px 16px"><span style="padding: 3px 8px; border-radius: 6px; background: #00876d; color: #ffffff; font-size: 11px; font-weight: 700">Ofrezco</span><div style="margin-top: 8px; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 26px">Alemán <span style="font-family: 'Figtree', system-ui, sans-serif; font-size: 12px; font-weight: 500">Nativo</span></div></div>
+            <div style="padding: 12px 16px; font-size: 14px; line-height: 1.45">Soy de Múnich, de Erasmus este curso. Me encantaría quedar para tomar algo…</div>
+          </div>
+        </div>
+      </div>
+      <span style="font-size: 13px; color: #6b6a66; max-width: 360px; text-align: center">Hamburguesa con animación collapse; filtros apilados; una tarjeta por fila.</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center">
+      <span style="font-size: 15px; font-weight: 600">Intercambios</span>
+      <div style="width: 390px; height: 844px; box-sizing: border-box; border: 10px solid #1c1b19; border-radius: 48px; overflow: hidden; background: #f6f5f1; display: flex; flex-direction: column">
+        <div style="background: #ffffff; border-bottom: 1px solid #e6e4df; padding: 40px 18px 14px; display: flex; align-items: center; justify-content: space-between"><span style="display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 500"><svg width="33" height="22" viewBox="0 0 33 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#00876d"></circle><circle cx="22" cy="11" r="10" fill="#6959ae"></circle><circle cx="22" cy="11" r="10" fill="#14284a" clip-path="url(#lg-left)"></circle></svg>Tándem</span><span style="padding: 6px 9px; border-radius: 10px; border: 1px solid #e6e4df; display: inline-flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></span></div>
+        <div style="padding: 18px; display: flex; flex-direction: column; gap: 14px">
+          <h2 style="margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 30px; letter-spacing: -0.02em">Intercambios</h2>
+          <div style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+            <strong style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px">Nuevo intercambio</strong>
+            <div style="display: flex; gap: 6px"><span style="flex: 1; text-align: center; padding: 8px; border-radius: 10px; background: #212529; color: #ffffff; font-size: 14px">Oferta</span><span style="flex: 1; text-align: center; padding: 8px; border-radius: 10px; border: 1px solid #212529; font-size: 14px">Petición</span></div>
+            <div style="display: flex; gap: 8px"><span style="flex: 1; padding: 9px 10px; border: 1px solid #e6e4df; border-radius: 10px; font-size: 14px">Inglés</span><span style="flex: 1; padding: 9px 10px; border: 1px solid #e6e4df; border-radius: 10px; font-size: 14px">B1</span></div>
+            <span style="padding: 10px; border-radius: 10px; background: #212529; color: #ffffff; text-align: center; font-size: 15px">Publicar</span>
+          </div>
+          <div style="background: #ffffff; border: 1px solid #e6e4df; border-radius: 14px; overflow: hidden">
+            <div style="padding: 12px 16px; border-bottom: 1px solid #e6e4df; font-weight: 700">Intercambios publicados <span style="padding: 2px 8px; border-radius: 999px; background: #f1efea; font-size: 12px">6</span></div>
+            <div style="overflow: hidden; position: relative">
+              <div style="width: 560px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); font-size: 13px">
+                <span style="padding: 10px 16px; color: #6b6a66; font-weight: 600">TIPO</span><span style="padding: 10px; color: #6b6a66; font-weight: 600">IDIOMA</span><span style="padding: 10px; color: #6b6a66; font-weight: 600">NIVEL</span><span style="padding: 10px; color: #6b6a66; font-weight: 600">A CAMBIO</span><span style="padding: 10px; color: #6b6a66; font-weight: 600">MODALIDAD</span>
+                <span style="padding: 10px 16px; border-top: 1px solid #e6e4df"><span style="padding: 2px 8px; border-radius: 999px; background: #00876d; color: #ffffff; font-size: 11px; font-weight: 700">Oferta</span></span><span style="padding: 10px; border-top: 1px solid #e6e4df">Alemán</span><span style="padding: 10px; border-top: 1px solid #e6e4df">Nativo</span><span style="padding: 10px; border-top: 1px solid #e6e4df">Español</span><span style="padding: 10px; border-top: 1px solid #e6e4df">Presencial</span>
+                <span style="padding: 10px 16px; border-top: 1px solid #e6e4df"><span style="padding: 2px 8px; border-radius: 999px; background: #6959ae; color: #ffffff; font-size: 11px; font-weight: 700">Petición</span></span><span style="padding: 10px; border-top: 1px solid #e6e4df">Inglés</span><span style="padding: 10px; border-top: 1px solid #e6e4df">B2</span><span style="padding: 10px; border-top: 1px solid #e6e4df">Catalán</span><span style="padding: 10px; border-top: 1px solid #e6e4df">Online</span>
+              </div>
+              <div style="height: 4px; margin: 4px 16px 10px; border-radius: 999px; background: #e6e4df"><div style="width: 55%; height: 4px; border-radius: 999px; background: #6b6a66"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span style="font-size: 13px; color: #6b6a66; max-width: 360px; text-align: center">Formulario arriba y tabla debajo; la tabla hace scroll horizontal sin desbordar la página.</span>
+    </div>
+  </div>
+</div>
+</template>
+<script>
+const LOGIC = {};
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const RE = /\{\{\s*([^}]+?)\s*\}\}/g;
+const WHOLE = /^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/;
+
+class DCLogic {
+  constructor() { this.props = {}; this.state = undefined; }
+  setState(patch) { this.state = Object.assign({}, this.state || {}, patch); mount(current, false); }
+  forceUpdate() { mount(current, false); }
+}
+
+function lookup(path, scope) {
+  path = path.trim();
+  if (path === 'true') return true;
+  if (path === 'false') return false;
+  if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+  return path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), scope);
+}
+
+function interp(str, scope) {
+  return str.replace(RE, (_, p) => { const v = lookup(p, scope); return v == null ? '' : String(v); });
+}
+
+function renderNodes(nodes, scope, parent) {
+  for (const n of nodes) {
+    if (n.nodeType === 3) {
+      parent.appendChild(document.createTextNode(interp(n.nodeValue, scope)));
+    } else if (n.nodeType === 1) {
+      if (n.localName === 'template' && 'for' in n.dataset) {
+        const list = lookup(n.dataset.for, scope) || [];
+        list.forEach((item, i) => {
+          const s = Object.create(scope);
+          s[n.dataset.as] = item;
+          s.$index = i;
+          renderNodes(n.content.childNodes, s, parent);
+        });
+      } else if (n.localName === 'template' && 'if' in n.dataset) {
+        if (lookup(n.dataset.if, scope)) renderNodes(n.content.childNodes, scope, parent);
+      } else {
+        const el = document.importNode(n, false);
+        for (const attr of Array.from(n.attributes)) {
+          if (!attr.value.includes('{{')) continue;
+          const whole = attr.value.match(WHOLE);
+          if (attr.name.startsWith('on') && whole) {
+            el.removeAttribute(attr.name);
+            const fn = lookup(whole[1], scope);
+            if (typeof fn === 'function') el.addEventListener(attr.name.slice(2), fn);
+          } else {
+            el.setAttribute(attr.name, interp(attr.value, scope));
+          }
+        }
+        renderNodes(n.childNodes, scope, el);
+        parent.appendChild(el);
+      }
+    }
+  }
+}
+
+const instances = {};
+let current = 'Main';
+const stage = document.getElementById('stage');
+
+function mount(key, resetScroll) {
+  if (!LOGIC[key]) return;
+  current = key;
+  if (!instances[key]) instances[key] = new LOGIC[key]();
+  const inst = instances[key];
+  const frag = document.createDocumentFragment();
+  const style = document.createElement('style');
+  style.textContent = document.getElementById('css-' + key).innerHTML;
+  frag.appendChild(style);
+  renderNodes(document.getElementById('tpl-' + key).content.childNodes, inst.renderVals(), frag);
+  stage.replaceChildren(frag);
+  document.querySelectorAll('.mk-bar nav a').forEach(a => {
+    if (a.dataset.board === key) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
+  if (resetScroll) window.scrollTo(0, 0);
+}
+
+stage.addEventListener('submit', e => e.preventDefault());
+window.addEventListener('hashchange', () => {
+  const key = location.hash.slice(1);
+  if (LOGIC[key]) mount(key, true);
+});
+
+LOGIC.Main = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      swatches: [
+        { name: 'Oferta', hex: '#00876d' },
+        { name: 'Oferta · fondo', hex: '#d7f7ed' },
+        { name: 'Oferta · texto', hex: '#005745' },
+        { name: 'Petición', hex: '#6959ae' },
+        { name: 'Petición · fondo', hex: '#eae8ff' },
+        { name: 'Petición · texto', hex: '#43337c' },
+        { name: 'Marca', hex: '#1e1d1c' },
+        { name: 'Peligro', hex: '#c92f33' },
+        { name: 'Peligro · fondo', hex: '#ffe7e4' },
+        { name: 'Tinta', hex: '#1c1b19' },
+        { name: 'Secundario', hex: '#6b6a66' },
+        { name: 'Borde', hex: '#e6e4df' },
+        { name: 'Página', hex: '#f6f5f1' },
+        { name: 'Superficie', hex: '#ffffff' }
+      ]
+    };
+  }
+}
+
+return Component;
+})();
+LOGIC.Arquetipos = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      personas: [
+        {
+          name: 'Jonas Keller', initials: 'JK', role: '22 años · Erasmus en Ingeniería Industrial',
+          main: '#00876d', bg: '#d7f7ed', text: '#005745',
+          quote: 'Quiero hablar español fuera del aula, no solo repetir ejercicios en clase.',
+          tags: ['Alemán nativo', 'Español B1', 'Móvil, entre clases'],
+          goals: ['Practicar conversación real cada semana', 'Conocer gente de su facultad', 'Quedar en persona cerca del campus'],
+          pains: ['Grupos de conversación con horario fijo', 'Tablones de corcho con anuncios caducados'],
+          solutions: [
+            { screen: 'Tablón', text: 'Filtra Español + Presencial y ve tarjetas resumidas.' },
+            { screen: 'Intercambios', text: 'Publica una oferta de alemán a cambio de español.' },
+            { screen: 'Tablón', text: 'Contacta desde la propia tarjeta.' }
+          ]
+        },
+        {
+          name: 'Aina Puig', initials: 'AP', role: '24 años · Estudiante de Filología',
+          main: '#6959ae', bg: '#eae8ff', text: '#43337c',
+          quote: 'Necesito soltura hablando antes del C1, pero entre semana no tengo tiempo.',
+          tags: ['Catalán nativo', 'Inglés B2', 'Portátil, fines de semana'],
+          goals: ['Encontrar nativos de inglés con disponibilidad en fin de semana', 'Hacer las sesiones online', 'Ofrecer catalán a cambio'],
+          pains: ['Plataformas de pago para practicar', 'Anuncios sin nivel ni modalidad claros'],
+          solutions: [
+            { screen: 'Intercambios', text: 'Publica una petición: Inglés · B2 · Online.' },
+            { screen: 'Tablón', text: 'Filtros por nivel y modalidad; color morado = petición.' },
+            { screen: 'Login', text: 'Acceso rápido con su email universitario.' }
+          ]
+        },
+        {
+          name: 'Diego Ruiz', initials: 'DR', role: '27 años · Administrador del tablón',
+          main: '#1c1b19', bg: '#f1efea', text: '#1c1b19',
+          quote: 'Tengo que dar de alta a los nuevos sin equivocarme y sin borrar a quien no toca.',
+          tags: ['Rol Admin', 'Informática', 'Escritorio'],
+          goals: ['Altas rápidas con datos válidos', 'Localizar cuentas por nombre o email', 'Dar de baja con seguridad'],
+          pains: ['Hojas de cálculo con emails duplicados', 'Borrados accidentales sin confirmación'],
+          solutions: [
+            { screen: 'Usuarios', text: 'Validación de email y aviso de duplicado.' },
+            { screen: 'Usuarios', text: 'Buscador por nombre o email en la tabla.' },
+            { screen: 'Usuarios', text: 'Modal de confirmación y toast tras cada baja.' }
+          ]
+        }
+      ]
+    };
+  }
+}
+
+return Component;
+})();
+LOGIC.Estructura = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      modules: [
+        { file: 'login.js', page: 'login.html · valida credenciales' },
+        { file: 'dashboard.js', page: 'dashboard.html · tarjetas y filtros' },
+        { file: 'intercambios.js', page: 'intercambios.html · alta y baja' },
+        { file: 'usuarios.js', page: 'usuarios.html · alta, búsqueda y baja' }
+      ]
+    };
+  }
+}
+
+return Component;
+})();
+LOGIC.Login = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const show = !!st.show;
+    const error = !!st.error;
+    return {
+      show: show,
+      hidden: !show,
+      error: error,
+      passType: show ? 'text' : 'password',
+      eyeLabel: show ? 'Ocultar contraseña' : 'Mostrar contraseña',
+      emailValue: error ? 'jonas@uni' : '',
+      emailBorder: error ? '#c92f33' : '#e6e4df',
+      passBorder: error ? '#c92f33' : '#e6e4df',
+      errorButton: error ? 'Volver al estado normal' : 'Ver estado de error',
+      toggleEye: () => this.setState({ show: !show }),
+      toggleError: () => this.setState({ error: !error }),
+      notes: [
+        { n: '1', title: 'Mostrar u ocultar contraseña', text: 'El ojo alterna type password/text, cambia el icono y el aria-label.' },
+        { n: '2', title: 'Entrar con clic o Enter', text: 'Evento submit del formulario. Si el usuario existe en datos.js, va al Tablón con ?email=.' },
+        { n: '3', title: 'Error de credenciales', text: 'Email inexistente: ambos campos en rojo. Contraseña errónea: solo la contraseña. Se limpia al reintentar.' },
+        { n: '4', title: 'Responsive', text: 'Por debajo de 992 px el panel de marca se oculta y el formulario ocupa todo el ancho.' }
+      ]
+    };
+  }
+}
+
+return Component;
+})();
+LOGIC.Dashboard = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    const filter = (this.state && this.state.filter) || 'all';
+    const theme = {
+      offer: { main: '#00876d', bg: '#d7f7ed', text: '#005745', label: 'Ofrezco' },
+      request: { main: '#6959ae', bg: '#eae8ff', text: '#43337c', label: 'Busco' }
+    };
+    const data = [
+      { type: 'offer', date: 'hace 2 h', language: 'Alemán', level: 'Nativo', exchange: 'Español', description: 'Soy de Múnich, de Erasmus este curso. Me encantaría quedar para tomar algo y charlar en alemán y español.', modality: 'Presencial', availability: 'Tardes', name: 'Jonas Keller', faculty: 'Ingeniería Industrial', initials: 'JK' },
+      { type: 'request', date: 'hace 3 h', language: 'Inglés', level: 'B2', exchange: 'Catalán', description: 'Preparo el C1 y necesito soltura hablando. Ofrezco catalán nativo y paciencia infinita.', modality: 'Online', availability: 'Fines de semana', name: 'Aina Puig', faculty: 'Filología', initials: 'AP' },
+      { type: 'offer', date: 'hace 5 h', language: 'Francés', level: 'Nativo', exchange: 'Español', description: 'Lyonnaise en Madrid. Podemos ver series en francés y comentarlas, o pasear por el Retiro.', modality: 'Ambas', availability: 'Mañanas', name: 'Camille Durand', faculty: 'Bellas Artes', initials: 'CD' },
+      { type: 'request', date: 'Ayer', language: 'Japonés', level: 'A2', exchange: 'Español', description: 'Estudio japonés por mi cuenta y quiero practicar conversación básica con alguien nativo.', modality: 'Online', availability: 'Noches', name: 'Diego Ruiz', faculty: 'Informática', initials: 'DR' },
+      { type: 'offer', date: 'Ayer', language: 'Italiano', level: 'Nativo', exchange: 'Inglés', description: 'Romano, doctorado en Historia. Un café a la semana en la cafetería de la facultad.', modality: 'Presencial', availability: 'Mediodía', name: 'Marco Rossi', faculty: 'Historia', initials: 'MR' },
+      { type: 'request', date: 'hace 2 días', language: 'Portugués', level: 'B1', exchange: 'Francés', description: 'Me voy de intercambio a Lisboa en febrero. Busco a alguien para practicar antes del viaje.', modality: 'Ambas', availability: 'Flexible', name: 'Sofía López', faculty: 'Económicas', initials: 'SL' }
+    ];
+    const cards = data
+      .filter(d => filter === 'all' || d.type === filter)
+      .map(d => Object.assign({}, d, { main: theme[d.type].main, bg: theme[d.type].bg, text: theme[d.type].text, typeLabel: theme[d.type].label }));
+    const pillDefs = [
+      { id: 'all', label: 'Todos', dot: 'transparent' },
+      { id: 'offer', label: 'Ofertas', dot: '#00876d' },
+      { id: 'request', label: 'Peticiones', dot: '#6959ae' }
+    ];
+    const pills = pillDefs.map(p => ({
+      label: p.label,
+      dot: p.id === filter && p.id === 'all' ? 'transparent' : p.dot,
+      pressed: p.id === filter ? 'true' : 'false',
+      bg: p.id === filter ? '#212529' : 'transparent',
+      color: p.id === filter ? '#ffffff' : '#1c1b19',
+      pick: () => this.setState({ filter: p.id })
+    }));
+    return {
+      cards: cards,
+      pills: pills,
+      offerCount: data.filter(d => d.type === 'offer').length,
+      requestCount: data.filter(d => d.type === 'request').length,
+      notes: [
+        { n: '1', title: 'Filtro por tipo', text: 'Todos, Ofertas o Peticiones. Las tarjetas se vuelven a pintar al instante (pruébalo en este prototipo).' },
+        { n: '2', title: 'Filtros y buscador', text: 'Idioma, nivel, modalidad y texto. Un único listener input en el formulario de filtros.' },
+        { n: '3', title: 'Tarjeta resumen por color', text: 'Verde = oferta, morado = petición. Contactar se tiñe con el color del tipo al pasar el ratón.' },
+        { n: '4', title: 'Usuario logueado', text: 'Iniciales y correo del usuario que llega desde el login (?email=). Salir vuelve al login.' },
+        { n: '5', title: 'Rejilla responsive', text: '3 columnas en escritorio, 2 en tablet y 1 en móvil (col-12 · col-md-6 · col-lg-4).' }
+      ]
+    };
+  }
+}
+
+return Component;
+})();
+LOGIC.Intercambios = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const type = st.type || 'offer';
+    const modality = st.modality || 'Presencial';
+    const base = [
+      { id: 1, type: 'offer', language: 'Alemán', level: 'Nativo', exchange: 'Español', modality: 'Presencial', date: 'hace 2 h' },
+      { id: 2, type: 'request', language: 'Inglés', level: 'B2', exchange: 'Catalán', modality: 'Online', date: 'hace 3 h' },
+      { id: 3, type: 'offer', language: 'Francés', level: 'Nativo', exchange: 'Español', modality: 'Ambas', date: 'hace 5 h' },
+      { id: 4, type: 'request', language: 'Japonés', level: 'A2', exchange: 'Español', modality: 'Online', date: 'Ayer' },
+      { id: 5, type: 'offer', language: 'Italiano', level: 'Nativo', exchange: 'Inglés', modality: 'Presencial', date: 'Ayer' },
+      { id: 6, type: 'request', language: 'Portugués', level: 'B1', exchange: 'Francés', modality: 'Ambas', date: 'hace 2 días' }
+    ];
+    const list = st.rows || base;
+    const rows = list.map(r => Object.assign({}, r, {
+      main: r.type === 'offer' ? '#00876d' : '#6959ae',
+      typeLabel: r.type === 'offer' ? 'Oferta' : 'Petición',
+      remove: () => this.setState({ rows: list.filter(x => x.id !== r.id) })
+    }));
+    const nextId = list.reduce((m, r) => Math.max(m, r.id), 0) + 1;
+    const typeDefs = [
+      { id: 'offer', label: 'Oferta', dot: '#00876d' },
+      { id: 'request', label: 'Petición', dot: '#6959ae' }
+    ];
+    return {
+      rows: rows,
+      count: rows.length,
+      types: typeDefs.map(t => ({
+        label: t.label, dot: t.dot,
+        pressed: t.id === type ? 'true' : 'false',
+        bg: t.id === type ? '#212529' : '#ffffff',
+        color: t.id === type ? '#ffffff' : '#1c1b19',
+        pick: () => this.setState({ type: t.id })
+      })),
+      modalities: ['Presencial', 'Online', 'Ambas'].map(m => ({
+        label: m,
+        pressed: m === modality ? 'true' : 'false',
+        bg: m === modality ? '#212529' : '#ffffff',
+        color: m === modality ? '#ffffff' : '#1c1b19',
+        pick: () => this.setState({ modality: m })
+      })),
+      publish: () => this.setState({ rows: list.concat([{ id: nextId, type: type, language: 'Inglés', level: 'B1', exchange: 'Español', modality: modality, date: '21/10/2026' }]) }),
+      notes: [
+        { n: '1', title: 'Publicar (alta)', text: 'Submit del formulario: se valida, se añade el objeto al array de datos.js y se redibuja la tabla.' },
+        { n: '2', title: 'Eliminar (baja)', text: 'Delegación de eventos en el tbody: el botón lleva data-id y se elimina ese intercambio.' },
+        { n: '3', title: 'Tabla viva', text: 'Contador actualizado y filas con fundido de 0,4 s. En móvil la tabla hace scroll dentro de su caja.' },
+        { n: '4', title: 'Selección visual', text: 'Tipo y modalidad son botones de opción (btn-check): la opción activa se rellena en negro.' }
+      ]
+    };
+  }
+}
+
+return Component;
+})();
+LOGIC.Usuarios = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const base = [
+      { id: 1, name: 'Jonas Keller', initials: 'JK', email: 'jonas@uni.es', native: 'Alemán', role: 'Estudiante', date: '22/09/2026' },
+      { id: 2, name: 'Aina Puig', initials: 'AP', email: 'aina@uni.es', native: 'Catalán', role: 'Estudiante', date: '18/09/2026' },
+      { id: 3, name: 'Camille Durand', initials: 'CD', email: 'camille@uni.es', native: 'Francés', role: 'Estudiante', date: '15/09/2026' },
+      { id: 4, name: 'Diego Ruiz', initials: 'DR', email: 'diego@uni.es', native: 'Español', role: 'Admin', date: '03/09/2026' }
+    ];
+    const list = st.users || base;
+    const pending = list.find(u => u.id === st.pendingId);
+    const rows = list.map(u => Object.assign({}, u, {
+      roleBg: u.role === 'Admin' ? '#1c1b19' : '#f1efea',
+      roleColor: u.role === 'Admin' ? '#ffffff' : '#1c1b19',
+      deleteLabel: 'Eliminar a ' + u.name,
+      ask: () => this.setState({ pendingId: u.id, toast: null })
+    }));
+    return {
+      rows: rows,
+      count: rows.length,
+      modalOpen: !!pending,
+      pendingName: pending ? pending.name : '',
+      pendingEmail: pending ? pending.email : '',
+      cancel: () => this.setState({ pendingId: null }),
+      confirm: () => this.setState({
+        users: list.filter(u => u.id !== st.pendingId),
+        pendingId: null,
+        toast: { title: 'Usuario eliminado', text: (pending ? pending.name : '') + ' ya no tiene acceso.' }
+      }),
+      create: () => this.setState({ toast: { title: 'Revisa el formulario', text: 'El email no tiene un formato válido.' } }),
+      toastOpen: !!st.toast,
+      toastTitle: st.toast ? st.toast.title : '',
+      toastText: st.toast ? st.toast.text : '',
+      closeToast: () => this.setState({ toast: null }),
+      notes: [
+        { n: '1', title: 'Validación del alta', text: 'Nombre obligatorio, email con formato válido y no repetido, contraseña de 8 caracteres o más. Mensaje bajo cada campo.' },
+        { n: '2', title: 'Baja con confirmación', text: 'La papelera abre un modal con nombre y email. Al confirmar se elimina del array y aparece un toast.' },
+        { n: '3', title: 'Buscador', text: 'Filtra la tabla por nombre o email mientras se escribe (listener input).' },
+        { n: '4', title: 'Rol visible', text: 'Admin en negro con escudo, Estudiante en gris. Iniciales calculadas a partir del nombre.' }
+      ]
+    };
+  }
+}
+
+return Component;
+})();
+LOGIC.Movil = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+
+return Component;
+})();
+
+mount(LOGIC[location.hash.slice(1)] ? location.hash.slice(1) : 'Main', true);
+</script>
+</body>
+</html>

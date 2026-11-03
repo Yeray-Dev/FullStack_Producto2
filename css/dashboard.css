@@ -1,0 +1,73 @@
+.btn-logout {
+	--bs-btn-color: var(--color-muted);
+	--bs-btn-border-color: var(--color-border);
+	--bs-btn-hover-color: var(--color-danger);
+	--bs-btn-hover-bg: var(--color-danger-bg);
+	--bs-btn-hover-border-color: var(--color-danger);
+	--bs-btn-active-color: var(--color-danger);
+	--bs-btn-active-bg: var(--color-danger-bg);
+	--bs-btn-active-border-color: var(--color-danger);
+}
+
+.btn-contact {
+	--bs-btn-color: var(--color-ink);
+	--bs-btn-bg: white;
+	--bs-btn-border-color: var(--color-border);
+	--bs-btn-hover-color: var(--color-ink);
+	--bs-btn-hover-bg: var(--color-surface);
+	--bs-btn-hover-border-color: var(--color-muted);
+	--bs-btn-active-color: var(--color-ink);
+	--bs-btn-active-bg: var(--color-border);
+	--bs-btn-active-border-color: var(--color-muted);
+	--bs-btn-padding-x: 0.875rem;
+	--bs-btn-font-weight: 500;
+}
+
+.dot-offer {
+	color: var(--color-offer);
+	font-size: 0.6em;
+}
+
+
+
+.dot-request {
+	color: var(--color-request);
+	font-size: 0.6em;
+}
+
+#search-filter::placeholder {
+	color: var(--color-muted);
+	font-weight: 300;
+}
+
+[data-field="level"] {
+	font-size: 0.75rem;
+	font-weight: 200;
+
+}
+
+.offer {
+	--type-main: var(--color-offer);
+	--type-bg: var(--color-offer-bg);
+	--type-text: var(--color-offer-text);
+}
+
+.request {
+	--type-main: var(--color-request);
+	--type-bg: var(--color-request-bg);
+	--type-text: var(--color-request-text);
+}
+
+.card .badge {
+	background-color: var(--type-main);
+}
+
+.card .card-header {
+	background-color: var(--type-bg);
+	color: var(--type-text)
+}
+
+.btn-contact {
+	--bs-btn-hover-border-color: var(--type-text);
+	--bs-btn-hover-bg: var(--type-bg)
+}

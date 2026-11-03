@@ -1,0 +1,119 @@
+.card {
+	--bs-card-border-radius: var(--radius-lg);
+}
+
+#user-form .form-label {
+	font-size: 0.875rem;
+	font-weight: 600;
+}
+
+#user-form ::placeholder,
+#user-search::placeholder {
+	color: var(--color-muted);
+}
+
+/* Tabla */
+.users-table {
+	--bs-table-bg: transparent;
+}
+
+.users-table thead th {
+	color: var(--color-muted);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+.users-table th:first-child,
+.users-table td:first-child {
+	padding-left: 1.5rem;
+}
+
+.users-table th:last-child,
+.users-table td:last-child {
+	padding-right: 1.5rem;
+}
+
+.avatar {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: var(--radius-pill);
+	background-color: var(--color-subtl);
+	font-size: 0.75rem;
+	font-weight: 600;
+}
+
+/* Badges de rol: el JS añade .role-admin o .role-student */
+.card .role-badge {
+	padding: 0.45em 0.8em;
+	border-radius: var(--radius-pill);
+	background-color: var(--color-subtl);
+	color: var(--color-ink);
+	font-weight: 600;
+}
+
+.card .role-badge .bi {
+	display: none;
+}
+
+.card .role-badge.role-admin {
+	background-color: var(--color-ink);
+	color: var(--color-surface);
+}
+
+.card .role-badge.role-admin .bi {
+	display: inline;
+}
+
+.btn-delete {
+	--bs-btn-color: var(--color-danger);
+	--bs-btn-border-color: var(--color-border);
+	--bs-btn-hover-color: var(--color-danger);
+	--bs-btn-hover-bg: var(--color-danger-bg);
+	--bs-btn-hover-border-color: var(--color-danger);
+	--bs-btn-active-color: var(--color-danger);
+	--bs-btn-active-bg: var(--color-danger-bg);
+	--bs-btn-active-border-color: var(--color-danger);
+}
+
+/* Modal de borrado */
+#delete-modal {
+	--bs-modal-border-radius: var(--radius-lg);
+}
+
+.modal-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 3.5rem;
+	height: 3.5rem;
+	border-radius: var(--radius);
+	background-color: var(--color-danger-bg);
+	color: var(--color-danger);
+	font-size: 1.5rem;
+}
+
+#confirm-delete {
+	--bs-btn-bg: var(--color-danger);
+	--bs-btn-border-color: var(--color-danger);
+	--bs-btn-hover-bg: color-mix(in srgb, var(--color-danger) 85%, black);
+	--bs-btn-hover-border-color: color-mix(in srgb, var(--color-danger) 85%, black);
+	--bs-btn-active-bg: color-mix(in srgb, var(--color-danger) 75%, black);
+	--bs-btn-active-border-color: color-mix(in srgb, var(--color-danger) 75%, black);
+}
+
+/* Toast */
+#user-toast {
+	--bs-toast-border-radius: var(--radius);
+	--bs-toast-max-width: 26rem;
+	box-shadow: var(--shadow);
+}
+
+.toast-icon {
+	color: var(--color-offer);
+}

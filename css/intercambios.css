@@ -1,0 +1,53 @@
+/* tarjetas con las esquinas igual que el resto de la web */
+.card {
+	--bs-card-border-radius: var(--radius-lg);
+}
+
+/* etiquetas del formulario */
+#exchange-form .form-label {
+	font-size: 0.875rem;
+	font-weight: 600;
+}
+
+#exchange-form ::placeholder {
+	color: var(--color-muted);
+}
+
+/* tabla */
+.exchanges-table {
+	--bs-table-bg: transparent;
+}
+
+.exchanges-table thead th {
+	color: var(--color-muted);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+.exchanges-table th:first-child,
+.exchanges-table td:first-child {
+	padding-left: 1.5rem;
+}
+
+.exchanges-table th:last-child,
+.exchanges-table td:last-child {
+	padding-right: 1.5rem;
+}
+
+/* etiquetas oferta / petición (los colores salen de .offer y .request de dashboard.css) */
+.exchanges-table .badge {
+	border-radius: var(--radius-pill);
+	padding: 0.45em 0.8em;
+}
+
+/* animación: las filas aparecen suavemente */
+@keyframes aparecer {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+.exchanges-table tbody tr {
+	animation: aparecer 0.4s;
+}

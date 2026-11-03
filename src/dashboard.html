@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tablón · Tándem</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css" rel="stylesheet">
+	<link href="../css/base.css" rel="stylesheet">
+	<link href="../css/dashboard.css" rel="stylesheet">
+	<script type="module" src="../js/dashboard.js"></script>
+</head>
+<body>
+	<header class="navbar navbar-expand-lg sticky-top bg-white border-bottom">
+		<div class="container-fluid px-4">
+			<a class="navbar-brand d-flex align-items-center  gap-2" href="dashboard.html">
+				<img src="../media/logo.svg" alt="" width="28" height="28">
+				Tándem
+			</a>
+			<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#mainMenu"
+					aria-controls="mainMenu"
+					aria-expanded="false"
+					aria-label="Abrir menu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div id="mainMenu" class="collapse navbar-collapse">
+				<nav class="ms-lg-5">
+					<ul class="navbar-nav gap-lg-3">
+						<li class="nav-item"><a class="nav-link" href="./dashboard.html" aria-current="page">
+							<i class="bi bi-grid-1x2" aria-hidden="true"></i>
+								Tablón
+							</a></li>
+						<li class="nav-item"><a class="nav-link" href="./intercambios.html">
+							<i class="bi bi-arrow-left-right" aria-hidden="true"></i>
+								Intercambios
+							</a></li>
+						<li class="nav-item"><a class="nav-link" href="./usuarios.html">
+							<i class="bi bi-people" aria-hidden="true"></i>
+								Usuarios
+							</a></li>
+					</ul>
+				</nav>
+				<div class="d-flex ms-lg-auto align-items-center gap-lg-3">
+					<span id="user-chip" class="d-none d-flex border rounded-5 shadow-sm p-2">
+						<span id="user-initials" class="p-1 bg-black text-white rounded-circle"></span>
+						<span id="user-email" class="p-1 small"></span>
+					</span>
+					<a href="./login.html" class="btn btn-logout">
+					<i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+						Salir
+					</a>
+				</div>	
+			</div>
+		</div>
+	</header>
+
+	<main class="px-4 pt-4">
+		<header class="d-lg-flex align-items-center justify-content-between mb-4">
+			<div>
+				<h1 class="fs-2 mb-2">Tablón</h1>
+				<p class="text-body-secondary small mb-0">Encuentra con quién practicar. 24 ofertas y 18 peticiones activas esta semana.</p>
+			</div>
+			<button type="button" class="btn btn-dark py-2 px-3 mt-auto rounded-3 bi-plus-lg"> Publicar intercambio</button>
+		</header>
+
+		<search class="p-1 my-3  border rounded-3 bg-white">
+			<form class="d-lg-flex align-items-center gap-lg-3" id="form-filter">
+				<fieldset class="type-filter p-2" role="group">
+					<legend class="visually-hidden">Tipo de intercambio</legend>
+					<div class="btn bg-body border-0">
+						<input type="radio" name="type" id="type-all" value="all" checked class="btn-check">
+						<label for="type-all" class="btn btn-outline-dark rounded-1 border-0">Todos</label>
+
+						<input type="radio" name="type" id="type-offer" value="offer" class="btn-check">
+						<label for="type-offer" class="btn btn-outline-dark rounded-1 b border-0 d-inline-flex align-items-center gap-2">
+								<i class="bi bi-circle-fill dot-offer"></i>Ofertas
+						</label>
+
+						<input type="radio" name="type" id="type-request" value="request" class="btn-check">
+						<label for="type-request" class="btn btn-outline-dark rounded-1 b border-0 d-inline-flex align-items-center gap-2">
+								<i class="bi bi-circle-fill dot-request"></i>Peticiones
+						</label>
+
+				</div>
+
+				</fieldset>
+
+				<label for="language-filter" class="visually-hidden">Idioma</label>
+					<div class="input-group flex-nowrap w-auto">
+						<span class="input-group-text bg-white border-end-0"><i class="bi bi-translate" aria-hidden="true"></i></span>
+						<select id="language-filter" name="language" class="form-select w-auto bg-white border-start-0">
+							<option value="all">Todos los idiomas</option>
+						</select>
+					</div>
+
+				<label for="level-filter" class="visually-hidden">Nivel</label>
+					<div class="input-group flex-nowrap w-auto">
+						<span class="input-group-text bg-white border-end-0"><i class="bi bi-bar-chart" aria-hidden="true"></i></span>
+						<select id="level-filter" name="level" class="form-select  w-auto bg-white bi-bar-chart border-start-0">
+							<option value="all">Todos los niveles</option>
+						</select>
+					</div>
+
+				<label for="modality-filter" class="visually-hidden">Modalidad</label>
+					<div class="input-group flex-nowrap w-auto">
+						<span class="input-group-text bg-white border-end-0"><i class="bi bi-geo-alt" aria-hidden="true"></i></span>
+						<select id="modality-filter" name="modality" class="form-select w-auto bg-white border-start-0">
+							<option value="all">Modalidad</option>
+						</select>
+					</div>
+
+				<label for="search-filter" class="visually-hidden">Buscar</label>
+				<div class="input-group flex-nowrap flex-grow-1 w-auto">
+					<span class="input-group-text border-end-0 bg-white"><i aria-hidden="true" class="bi bi-search"></i></span>
+					<input type="search" id="search-filter" name="q" placeholder="Buscar por nombre o facultad" class="form-control border-start-0 bg-white">
+				</div>
+
+			</form>
+		</search>
+
+		<ul id="card-list" class="row g-4 list-unstyled">
+			<!-- Tarjetas renderizadas por JS -->
+		</ul>
+
+		<template id="card-template">
+			<li class="col-12 col-md-6 col-lg-4">
+				<article class="card h-100 bg-white">
+					<header class="card-header">
+						<div class="d-flex justify-content-between mt-3">
+							<span class="badge" data-field="type"></span>
+							<time data-field="date" class="text-body-secondary small"></time>
+						</div>
+						<h2 class="mt-2">
+							<span data-field="language"></span>
+							<span data-field="level" class="ms-2"></span>
+						</h2>
+					</header>
+
+					<div class="card-body">
+						<p class="text-body-secondary small mb-0 pb-3 bi bi-arrow-left-right"> A cambio de <strong data-field="exchange" class="fw-bold fs-6 text-black"></strong></p>
+						<p data-field="description" class="me-1"></p>
+						<p>
+							<span data-field="modality" class="bi bi-geo-alt pe-3 text-body-secondary small"></span>
+							<span data-field="availability" class="bi bi-clock text-body-secondary small"></span>
+						</p>
+					</div>
+
+					<footer class="card-footer d-flex justify-content-between bg-white">
+						<div>
+							<span data-field="initials"></span>
+							<p data-field="user-name" class="mb-0"></p>
+							<p data-field="faculty" class="mb-0 text-body-secondary small"></p>
+						</div>
+						<button type="button" class="btn btn-contact btn-sm"
+								 style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem;"><i class="bi bi-chat-dots mx-2"></i>Contactar</button>
+					</footer>
+				</article>
+			</li>
+		</template>
+	</main>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>
+
