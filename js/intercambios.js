@@ -2,8 +2,7 @@
  * Prompts (IA: Claude, Anthropic)
  * 1. "¿Cómo puedo hacer que el gráfico se vea responsive?"
  * 2. "¿Cómo hago que las barras no se vean enormes en pantallas anchas?"
- * 3. "¿Por qué uso `textContent` y no `innerHTML` al pintar la tabla?"
- * 4. "¿Qué diferencia hay entre `async/await` y usar `.then()`, y cuál me conviene aquí? explicamelos"
+ * 3. "¿Qué diferencia hay entre `async/await` y usar `.then()`, y cuál me conviene aquí? explicamelos"
  */
 import * as almacenaje from "./almacenaje.js"
 import { formatDate } from "./utils.js"
