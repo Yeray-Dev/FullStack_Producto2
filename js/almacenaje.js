@@ -79,3 +79,53 @@ export const users = [
 	{ id: 3, name: "Camille Durand", email: "camille@uni.es", password: "1234", faculty: "Bellas Artes", nativeLanguage: "fr", role: "student", createdAt: "2026-09-15" },
 	{ id: 4, name: "Diego Ruiz", email: "diego@uni.es", password: "1234", faculty: "Informática", nativeLanguage: "es", role: "admin", createdAt: "2026-09-03" }
 ]
+
+
+export function obtenerUsuarioActivo() {
+	return localStorage.getItem("usuarioActivo")
+}
+
+
+const NOMBRE_BD = "tandem"
+const VERSION_BD = 1
+const TABLA = "intercambios"
+
+export function abrirBD() {
+	return new Promise((resolve, reject) => {
+		const peticion = indexedDB.open(NOMBRE_BD, VERSION_BD)
+
+		peticion.onupgradeneeded = () => {
+			peticion.result.createObjectStore(TABLA, { keyPath: "id", autoIncrement: true })
+		}
+
+		peticion.onsuccess = () => resolve(peticion.result)
+		peticion.onerror = () => reject(peticion.error)
+	})
+}
+
+export async function publicarIntercambio(intercambio) {
+	const bd = await abrirBD()
+	return new Promise((resolve, reject) => {
+		const peticion = bd.transaction(TABLA, "readwrite").objectStore(TABLA).add(intercambio)
+		peticion.onsuccess = () => resolve(peticion.result)
+		peticion.onerror = () => reject(peticion.error)
+	})
+}
+
+export async function obtenerIntercambios() {
+	const bd = await abrirBD()
+	return new Promise((resolve, reject) => {
+		const peticion = bd.transaction(TABLA, "readonly").objectStore(TABLA).getAll()
+		peticion.onsuccess = () => resolve(peticion.result)
+		peticion.onerror = () => reject(peticion.error)
+	})
+}
+
+export async function borrarIntercambio(id) {
+	const bd = await abrirBD()
+	return new Promise((resolve, reject) => {
+		const peticion = bd.transaction(TABLA, "readwrite").objectStore(TABLA).delete(id)
+		peticion.onsuccess = () => resolve()
+		peticion.onerror = () => reject(peticion.error)
+	})
+}
