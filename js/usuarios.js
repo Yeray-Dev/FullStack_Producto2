@@ -20,6 +20,9 @@ const deleteEmail = document.querySelector("#delete-email")
 const confirmDeleteButton = document.querySelector("#confirm-delete")
 const deleteModal = bootstrap.Modal.getOrCreateInstance("#delete-modal")
 const searchInput = document.querySelector("#user-search")
+const activeUserName = document.querySelector("#usuarioActivo")
+const activeUserInitials = document.querySelector("#active-user-initials")
+const logoutLink = document.querySelector("#logout-link")
 
 let users = []
 let pendingId = null
@@ -32,6 +35,14 @@ languageSelect.value = "es"
 
 function loadUsers() {
 	users = almacenaje.obtenerUsuarios()
+}
+
+function showActiveUser() {
+	const email = almacenaje.obtenerUsuarioActivo()
+	const user = users.find(user => user.email === email)
+
+	activeUserName.textContent = user ? user.name : "-no login-"
+	activeUserInitials.textContent = user ? getInitials(user.name) : "?"
 }
 
 function createRow(user) {
@@ -142,5 +153,10 @@ searchInput.addEventListener("input", () => {
 	renderUsers(getVisibleUsers())
 })
 
+logoutLink.addEventListener("click", () => {
+	almacenaje.cerrarSesion()
+})
+
 loadUsers()
 renderUsers(users)
+showActiveUser()
