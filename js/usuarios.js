@@ -57,7 +57,8 @@ function createRow(user) {
 	row.querySelector(".role-badge").classList.add("role-" + user.role)
 	createdAt.textContent = formatDate(user.createdAt)
 	createdAt.dateTime = user.createdAt
-	row.querySelector('[data-action="delete"]').dataset.id = user.id
+	for (const button of row.querySelectorAll("[data-action]"))
+	button.dataset.id = user.id
 	return row
 }
 
@@ -81,6 +82,18 @@ function showToast(title, message) {
 	toastTitle.textContent = title
 	toastMessage.textContent = message
 	userToast.show()
+}
+
+function togglePassword(button, user) {
+	const text = button.closest("td").querySelector('[data-field="password"]')
+	const icon = button.querySelector(".bi")
+	const visible = button.dataset.visible === "true"
+
+	text.textContent = visible ? "••••••••" : user.password
+	icon.classList.toggle("bi-eye", visible)
+	icon.classList.toggle("bi-eye-slash", !visible)
+	button.dataset.visible = String(!visible)
+	button.setAttribute("aria-label", visible ? "Mostrar contraseña" : "Ocultar contraseña")
 }
 
 userForm.addEventListener("submit", event => {
@@ -128,11 +141,17 @@ userForm.addEventListener("input", event => {
 })
 
 userList.addEventListener("click", event => {
-	const button = event.target.closest('[data-action="delete"]')
+	const button = event.target.closest("[data-action]")
 	if (!button)
 		return
 
 	const user = users.find(user => user.id === Number(button.dataset.id))
+
+	if (button.dataset.action === "toggle-password") {
+		togglePassword(button, user)
+		return
+	}
+
 	pendingId = user.id
 	deleteName.textContent = user.name
 	deleteEmail.textContent = user.email
