@@ -122,3 +122,7 @@
 	font-family: ui-monospace, monospace;
 	letter-spacing: 0.05em;
 }
+
+.toast-icon.is-error {
+	color: var(--color-danger);
+}

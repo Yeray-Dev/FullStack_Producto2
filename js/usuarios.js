@@ -23,6 +23,7 @@ const searchInput = document.querySelector("#user-search")
 const activeUserName = document.querySelector("#usuarioActivo")
 const activeUserInitials = document.querySelector("#active-user-initials")
 const logoutLink = document.querySelector("#logout-link")
+const toastIcon = document.querySelector("#user-toast .toast-icon")
 
 let users = []
 let pendingId = null
@@ -34,7 +35,12 @@ fillSelect(roleSelect, roles)
 languageSelect.value = "es"
 
 function loadUsers() {
-	users = almacenaje.obtenerUsuarios()
+	try {
+		users = almacenaje.obtenerUsuarios()
+	} catch (error) {
+		users = []
+		showError(error)
+	}
 }
 
 function showActiveUser() {
@@ -58,7 +64,7 @@ function createRow(user) {
 	createdAt.textContent = formatDate(user.createdAt)
 	createdAt.dateTime = user.createdAt
 	for (const button of row.querySelectorAll("[data-action]"))
-	button.dataset.id = user.id
+		button.dataset.id = user.id
 	return row
 }
 
@@ -67,6 +73,17 @@ function renderUsers(list) {
 	for (const user of list) {
 		userList.append(createRow(user))
 	}
+
+	if (list.length === 0) {
+		const row = document.createElement("tr")
+		const cell = document.createElement("td")
+		cell.colSpan = 8
+		cell.className = "text-center text-body-secondary py-4"
+		cell.textContent = users.length === 0 ? "Todavía no hay usuarios registrados." : "Ningún usuario coincide con la búsqueda."
+		row.append(cell)
+		userList.append(row)
+	}
+
 	userCount.textContent = users.length
 }
 
@@ -78,10 +95,17 @@ function getVisibleUsers() {
 	)
 }
 
-function showToast(title, message) {
+function showToast(title, message, isError = false) {
 	toastTitle.textContent = title
 	toastMessage.textContent = message
+	toastIcon.classList.toggle("bi-check-circle-fill", !isError)
+	toastIcon.classList.toggle("bi-x-circle-fill", isError)
+	toastIcon.classList.toggle("is-error", isError)
 	userToast.show()
+}
+
+function showError(error) {
+	showToast("No se ha podido completar", error.message, true)
 }
 
 function togglePassword(button, user) {
@@ -120,14 +144,19 @@ userForm.addEventListener("submit", event => {
 	if (!nameOk || !emailOk || emailRepeated || !passwordOk)
 		return
 
-	almacenaje.crearUsuario({
-		name,
-		email,
-		password,
-		faculty: "",
-		nativeLanguage: languageSelect.value,
-		role: roleSelect.value
-	})
+	try {
+		almacenaje.crearUsuario({
+			name,
+			email,
+			password,
+			faculty: "",
+			nativeLanguage: languageSelect.value,
+			role: roleSelect.value
+		})
+	} catch (error) {
+		showError(error)
+		return
+	}
 
 	loadUsers()
 	userForm.reset()
@@ -147,6 +176,13 @@ userList.addEventListener("click", event => {
 
 	const user = users.find(user => user.id === Number(button.dataset.id))
 
+	if (!user) {
+		showError(new Error("Ese usuario ya no existe."))
+		loadUsers()
+		renderUsers(getVisibleUsers())
+		return
+	}
+
 	if (button.dataset.action === "toggle-password") {
 		togglePassword(button, user)
 		return
@@ -159,13 +195,17 @@ userList.addEventListener("click", event => {
 })
 
 confirmDeleteButton.addEventListener("click", () => {
-	const removed = almacenaje.borrarUsuario(pendingId)
-
-	pendingId = null
-	loadUsers()
-	renderUsers(getVisibleUsers())
-	deleteModal.hide()
-	showToast("Usuario eliminado", `${removed.name} ya no tiene acceso.`)
+	try {
+		const removed = almacenaje.borrarUsuario(pendingId)
+		loadUsers()
+		renderUsers(getVisibleUsers())
+		showToast("Usuario eliminado", `${removed.name} ya no tiene acceso.`)
+	} catch (error) {
+		showError(error)
+	} finally {
+		pendingId = null
+		deleteModal.hide()
+	}
 })
 
 searchInput.addEventListener("input", () => {
