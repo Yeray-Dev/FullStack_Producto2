@@ -1,5 +1,6 @@
-import { users, languages, roles } from "./datos.js"
-import { fillSelect, getLabel, getInitials, formatDate, showLoggedUser } from "./utils.js"
+import { languages, roles } from "./constantes.js"
+import * as almacenaje from "./almacenaje.js"
+import { fillSelect, getLabel, getInitials, formatDate } from "./utils.js"
 
 const userForm = document.querySelector("#user-form")
 const nameInput = document.querySelector("#user-name")
@@ -20,6 +21,7 @@ const confirmDeleteButton = document.querySelector("#confirm-delete")
 const deleteModal = bootstrap.Modal.getOrCreateInstance("#delete-modal")
 const searchInput = document.querySelector("#user-search")
 
+let users = []
 let pendingId = null
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -27,6 +29,10 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 fillSelect(languageSelect, languages)
 fillSelect(roleSelect, roles)
 languageSelect.value = "es"
+
+function loadUsers() {
+	users = almacenaje.obtenerUsuarios()
+}
 
 function createRow(user) {
 	const row = rowTemplate.content.cloneNode(true)
@@ -60,17 +66,6 @@ function getVisibleUsers() {
 	)
 }
 
-function getNextId() {
-	return Math.max(0, ...users.map(user => user.id)) + 1
-}
-
-function getToday() {
-	const today = new Date()
-	const month = String(today.getMonth() + 1).padStart(2, "0")
-	const day = String(today.getDate()).padStart(2, "0")
-	return `${today.getFullYear()}-${month}-${day}`
-}
-
 function showToast(title, message) {
 	toastTitle.textContent = title
 	toastMessage.textContent = message
@@ -101,17 +96,16 @@ userForm.addEventListener("submit", event => {
 	if (!nameOk || !emailOk || emailRepeated || !passwordOk)
 		return
 
-	users.push({
-		id: getNextId(),
+	almacenaje.crearUsuario({
 		name,
 		email,
 		password,
 		faculty: "",
 		nativeLanguage: languageSelect.value,
-		role: roleSelect.value,
-		createdAt: getToday()
+		role: roleSelect.value
 	})
 
+	loadUsers()
 	userForm.reset()
 	languageSelect.value = "es"
 	renderUsers(getVisibleUsers())
@@ -135,12 +129,10 @@ userList.addEventListener("click", event => {
 })
 
 confirmDeleteButton.addEventListener("click", () => {
-	const index = users.findIndex(user => user.id === pendingId)
-	if (index === -1)
-		return
+	const removed = almacenaje.borrarUsuario(pendingId)
 
-	const [removed] = users.splice(index, 1)
 	pendingId = null
+	loadUsers()
 	renderUsers(getVisibleUsers())
 	deleteModal.hide()
 	showToast("Usuario eliminado", `${removed.name} ya no tiene acceso.`)
@@ -150,5 +142,5 @@ searchInput.addEventListener("input", () => {
 	renderUsers(getVisibleUsers())
 })
 
+loadUsers()
 renderUsers(users)
-showLoggedUser(users)
