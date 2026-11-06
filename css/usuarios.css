@@ -117,3 +117,12 @@
 .toast-icon {
 	color: var(--color-offer);
 }
+
+.password-mask {
+	font-family: ui-monospace, monospace;
+	letter-spacing: 0.05em;
+}
+
+.toast-icon.is-error {
+	color: var(--color-danger);
+}
