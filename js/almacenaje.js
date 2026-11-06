@@ -1,3 +1,9 @@
+/*
+ * Prompts (IA: Claude, Anthropic) Marc
+ * 1. "como plantearias el manejo de errores respecto a lo desarollado"
+ * 2. "como puedo ver y modificar a mano lo que hay guardado en localStorage desde las herramientas del navegador opera"
+ */
+
 export const exchanges = [
 	{
 		id: 1,
@@ -85,6 +91,81 @@ export function obtenerUsuarioActivo() {
 	return localStorage.getItem("usuarioActivo")
 }
 
+const CLAVE_USUARIOS = "usuarios"
+const CLAVE_USUARIO_ACTIVO = "usuarioActivo"
+
+function guardarUsuarios(lista) {
+	try {
+		localStorage.setItem(CLAVE_USUARIOS, JSON.stringify(lista))
+	} catch {
+		throw new Error("No se han podido guardar los usuarios en el navegador.")
+	}
+}
+
+export function obtenerUsuarios() {
+	const texto = localStorage.getItem(CLAVE_USUARIOS)
+
+	if (texto === null) {
+		guardarUsuarios(users)
+		return structuredClone(users)
+	}
+
+	try {
+		return JSON.parse(texto)
+	} catch {
+		throw new Error("Los usuarios guardados están dañados.")
+	}
+}
+
+export function crearUsuario(datos) {
+	const lista = obtenerUsuarios()
+	const email = datos.email.trim().toLowerCase()
+
+	if (lista.some(usuario => usuario.email.toLowerCase() === email))
+		throw new Error("Ya existe un usuario con este email.")
+
+	const hoy = new Date()
+	const mes = String(hoy.getMonth() + 1).padStart(2, "0")
+	const dia = String(hoy.getDate()).padStart(2, "0")
+	const usuario = {
+		...datos,
+		id: Math.max(0, ...lista.map(u => u.id)) + 1,
+		email,
+		createdAt: `${hoy.getFullYear()}-${mes}-${dia}`
+	}
+
+	lista.push(usuario)
+	guardarUsuarios(lista)
+	return usuario
+}
+
+export function borrarUsuario(id) {
+	const lista = obtenerUsuarios()
+	const usuario = lista.find(u => u.id === id)
+
+	if (!usuario)
+		throw new Error("Ese usuario ya no existe.")
+	if (usuario.email === obtenerUsuarioActivo())
+		throw new Error("No puedes eliminar tu propia cuenta mientras tienes la sesión iniciada.")
+
+	guardarUsuarios(lista.filter(u => u.id !== id))
+	return usuario
+}
+
+export function loguearUsuario(email, password) {
+	const correo = email.trim().toLowerCase()
+	const usuario = obtenerUsuarios().find(u => u.email.toLowerCase() === correo && u.password === password)
+
+	if (!usuario)
+		return null
+
+	localStorage.setItem(CLAVE_USUARIO_ACTIVO, usuario.email)
+	return usuario
+}
+
+export function cerrarSesion() {
+	localStorage.removeItem(CLAVE_USUARIO_ACTIVO)
+}
 
 const NOMBRE_BD = "tandem"
 const VERSION_BD = 1

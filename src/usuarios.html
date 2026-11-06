@@ -1,3 +1,8 @@
+<!--
+	Prompts (IA: Claude, Anthropic)
+	1. "como estructuro el HTML de una tabla con <template> para que sea accesible y fácil de rellenar desde js?"
+-->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -47,12 +52,12 @@
 					</ul>
 				</nav>
 			<div class="d-flex ms-lg-auto align-items-center gap-lg-3">
-					<span id="user-chip" class="d-none d-flex border rounded-5 shadow-sm p-2">
-						<span id="user-initials" class="p-1 bg-black text-white rounded-circle"></span>
-						<span id="user-email" class="p-1 small"></span>
+										<span class="d-flex align-items-center border rounded-5 shadow-sm p-2">
+						<span id="active-user-initials" class="p-1 bg-black text-white rounded-circle">?</span>
+						<span id="usuarioActivo" class="p-1 small">-no login-</span>
 					</span>
-					<a href="./login.html" class="btn btn-logout">
-					<i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+					<a id="logout-link" href="./login.html" class="btn btn-logout">
+						<i class="bi bi-box-arrow-right" aria-hidden="true"></i>
 						Salir
 					</a>
 				</div>	
@@ -133,6 +138,7 @@
 								<tr>
 									<th scope="col">Usuario</th>
 									<th scope="col">Email</th>
+									<th scope="col">Contraseña</th>
 									<th scope="col">Nativo</th>
 									<th scope="col">Rol</th>
 									<th scope="col">Alta</th>
@@ -140,7 +146,7 @@
 								</tr>
 							</thead>
 							<tbody id="user-list">
-								<!-- Filas renderizadas por JS -->
+								<!-- Filas renderizdas por JS -->
 							</tbody>
 						</table>
 					</div>
@@ -154,6 +160,14 @@
 					<div class="d-flex align-items-center gap-2">
 						<span data-field="initials" class="avatar"></span>
 						<span data-field="name" class="fw-semibold"></span>
+					</div>
+				</td>
+				<td>
+					<div class="d-flex align-items-center gap-2">
+						<span data-field="password" class="password-mask">••••••••</span>
+						<button type="button" class="btn btn-sm btn-link p-0 text-body-secondary" data-action="toggle-password" aria-label="Mostrar contraseña">
+							<i class="bi bi-eye" aria-hidden="true"></i>
+						</button>
 					</div>
 				</td>
 				<td data-field="email"></td>
