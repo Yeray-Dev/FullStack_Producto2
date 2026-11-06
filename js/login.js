@@ -1,4 +1,4 @@
-import { users } from "./datos.js"
+import { users } from "./almacenaje.js"
 
 const loginForm = document.getElementById("login-form")
 const inputEmail = document.getElementById("email")
