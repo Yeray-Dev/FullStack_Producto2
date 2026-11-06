@@ -32,7 +32,7 @@
 			<div id="mainMenu" class="collapse navbar-collapse">
 				<nav class="ms-lg-5">
 					<ul class="navbar-nav gap-lg-3">
-						<li class="nav-item"><a class="nav-link" href="./dashboard.html" aria-current="page">
+						<li class="nav-item"><a class="nav-link active" href="./dashboard.html" aria-current="page">
 							<i class="bi bi-grid-1x2" aria-hidden="true"></i>
 								Tablón
 							</a></li>
@@ -64,9 +64,9 @@
 		<header class="d-lg-flex align-items-center justify-content-between mb-4">
 			<div>
 				<h1 class="fs-2 mb-2">Tablón</h1>
-				<p class="text-body-secondary small mb-0">Encuentra con quién practicar. 24 ofertas y 18 peticiones activas esta semana.</p>
+				<p class="text-body-secondary small mb-0">Encuentra con quién practicar.  <span data-field="numero-ofertas-activas"></span> ofertas y <span data-field="numeros-peticiones-activas"></span>  peticiones activas esta semana.</p>
 			</div>
-			<button type="button" class="btn btn-dark py-2 px-3 mt-auto rounded-3 bi-plus-lg"> Publicar intercambio</button>
+			<a href="./intercambios.html" class="btn btn-dark py-2 px-3 mt-auto rounded-3 bi-plus-lg">Publicar intercambio</a>
 		</header>
 
 		<search class="p-1 my-3  border rounded-3 bg-white">
@@ -137,6 +137,7 @@
 							<time data-field="date" class="text-body-secondary small"></time>
 						</div>
 						<h2 class="mt-2">
+							<span data-field="title"></span> <!-- PROVISIONAL -->
 							<span data-field="language"></span>
 							<span data-field="level" class="ms-2"></span>
 						</h2>

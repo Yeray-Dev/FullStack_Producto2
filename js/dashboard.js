@@ -1,5 +1,6 @@
-import { languages, level, modality, exchanges, type, users } from "./datos.js"
+import { languages, level, modality, type } from "./constantes.js"
 import { fillSelect, getLabel, showLoggedUser } from "./utils.js"
+import { exchanges, users } from "./almacenaje.js"
 
 showLoggedUser(users)
 

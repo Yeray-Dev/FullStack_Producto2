@@ -1,4 +1,4 @@
-const exchanges = [
+export const exchanges = [
 	{
 		id: 1,
 		type: "offer",
@@ -73,7 +73,7 @@ const exchanges = [
 	},
 ]
 
-const users = [
+export const users = [
 	{ id: 1, name: "Jonas Keller", email: "j@uni.es", password: "1234", faculty: "Ingeniería Industrial", nativeLanguage: "de", role: "student", createdAt: "2026-09-22" },
 	{ id: 2, name: "Aina Puig", email: "aina@uni.es", password: "1234", faculty: "Filología", nativeLanguage: "ca", role: "student", createdAt: "2026-09-18" },
 	{ id: 3, name: "Camille Durand", email: "camille@uni.es", password: "1234", faculty: "Bellas Artes", nativeLanguage: "fr", role: "student", createdAt: "2026-09-15" },
