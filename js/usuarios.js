@@ -1,3 +1,9 @@
+/*
+ * Prompts (IA: Claude, Anthropic)
+ * 1. "como planificarias el desarrollo de la interfaz de gestion de usuarios para pasar de datos en memoria a localStorage sin romper lo que ya funciona?"	
+ * 2. "revisa usuarios.js porque tengo errores, dime que he puesto mal en el codigo "
+ */
+
 import { languages, roles } from "./constantes.js"
 import * as almacenaje from "./almacenaje.js"
 import { fillSelect, getLabel, getInitials, formatDate } from "./utils.js"

@@ -1,3 +1,9 @@
+/*
+ * Prompts (IA: Claude, Anthropic) Marc
+ * 1. "como plantearias el manejo de errores respecto a lo desarollado"
+ * 2. "como puedo ver y modificar a mano lo que hay guardado en localStorage desde las herramientas del navegador opera"
+ */
+
 export const exchanges = [
 	{
 		id: 1,
