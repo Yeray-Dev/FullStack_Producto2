@@ -1,4 +1,5 @@
-import { users } from "./almacenaje.js"
+import { loguearUsuario } from "./almacenaje.js"
+
 
 const loginForm = document.getElementById("login-form")
 const inputEmail = document.getElementById("email")
@@ -20,18 +21,19 @@ loginForm.addEventListener("submit", event => {
 	inputEmail.classList.remove("is-invalid")
 	inputPass.classList.remove("is-invalid")
 
-	const email = inputEmail.value.trim().toLowerCase()
-	const password = inputPass.value
-	const user = users.find(u => u.email.toLowerCase() === email && u.password === password)
+	try{
+		const user = loguearUsuario(inputEmail.value, inputPass.value)
 
-	if (user) {
-		window.location.href = "dashboard.html?email=" + encodeURIComponent(user.email)
-		return
+		if (user) {
+			window.location.href = "dashboard.html"
+			return
+		}
+		inputEmail.classList.add("is-invalid")
+		inputPass.classList.add("is-invalid")
+	
+	} catch (error){
+		
+
 	}
 
-	const emailExists = users.some(u => u.email.toLowerCase() === email)
-	if (!emailExists)
-		inputEmail.classList.add("is-invalid")
-	inputPass.classList.add("is-invalid")
 })
-
