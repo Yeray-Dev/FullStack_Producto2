@@ -3,6 +3,7 @@
  * 1. "¿Cómo puedo hacer que el gráfico se vea responsive?"
  * 2. "¿Cómo hago que las barras no se vean enormes en pantallas anchas?"
  * 3. "¿Qué diferencia hay entre `async/await` y usar `.then()`, y cuál me conviene aquí? explicamelos"
+ * 4. "Porque usar math? que diferencias hay?"
  */
 import * as almacenaje from "./almacenaje.js"
 import { formatDate } from "./utils.js"
@@ -30,7 +31,7 @@ function mostrarError(texto) {
 
 function validar(i) {
 	if (i.titulo === "") return "El título es obligatorio."
-	if (!i.email.includes("@")) return "El email no es válido."
+	if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.email)) return "El email no es válido."
 	if (i.fecha === "") return "Elige una fecha."
 	if (i.descripcion === "") return "La descripción es obligatoria."
 	if (i.tipo === "") return "Elige el tipo de intercambio."
@@ -42,7 +43,7 @@ function dibujarGrafico(lista) {
 	ultimaLista = lista
 
 	const ANCHO = zonaGrafico.clientWidth
-	const ALTO = Math.round(ANCHO * 0.6)
+	const ALTO = Math.min(Math.round(ANCHO * 0.6), 320)
 	const ratio = window.devicePixelRatio || 1
 
 	canvas.width = ANCHO * ratio
@@ -60,8 +61,7 @@ function dibujarGrafico(lista) {
 	const margen = 40
 	const base = ALTO - 40
 	const alturaMaxima = ALTO - 90
-	const anchoBarra = ANCHO / 5
-
+	const anchoBarra = Math.min(ANCHO / 5, 120)
 	ctx.clearRect(0, 0, ANCHO, ALTO)
 
 	ctx.strokeStyle = "#6b6a66"

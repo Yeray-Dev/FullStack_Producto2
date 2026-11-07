@@ -2,6 +2,7 @@
  * Prompts (IA: Claude, Anthropic) Marc
  * 1. "como plantearias el manejo de errores respecto a lo desarollado"
  * 2. "como puedo ver y modificar a mano lo que hay guardado en localStorage desde las herramientas del navegador opera"
+ 
  */
 
 export const exchanges = [
@@ -168,15 +169,34 @@ export function cerrarSesion() {
 }
 
 const NOMBRE_BD = "tandem"
-const VERSION_BD = 1
+const VERSION_BD = 2
 const TABLA = "intercambios"
 
 export function abrirBD() {
 	return new Promise((resolve, reject) => {
 		const peticion = indexedDB.open(NOMBRE_BD, VERSION_BD)
 
-		peticion.onupgradeneeded = () => {
-			peticion.result.createObjectStore(TABLA, { keyPath: "id", autoIncrement: true })
+		peticion.onupgradeneeded = (evento) => {
+			const bd = peticion.result
+
+			if (evento.oldVersion < 1) {
+				bd.createObjectStore(TABLA, { keyPath: "id", autoIncrement: true })
+			}
+
+			if (evento.oldVersion < 2) {
+				const tabla = peticion.transaction.objectStore(TABLA)
+				const hoy = new Date().toISOString().slice(0, 10)
+
+				for (const e of exchanges) {
+					tabla.add({
+						titulo: e.user.name + " · " + e.language.toUpperCase(),
+						email: users.find(u => u.name === e.user.name)?.email || "",
+						fecha: hoy,
+						descripcion: e.description,
+						tipo: e.type
+					})
+				}
+			}
 		}
 
 		peticion.onsuccess = () => resolve(peticion.result)
