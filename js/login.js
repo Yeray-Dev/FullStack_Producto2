@@ -18,14 +18,27 @@ buttonEye.addEventListener("click", () => {
 
 const loginAlert = document.getElementById("login-alert")
 
-		function mostrarError(mensaje) {
-			loginAlert.textContent = mensaje
-			loginAlert.classList.remove("d-none")
-		}
+	function mostrarError(mensaje) {
+		loginAlert.textContent = mensaje
+		loginAlert.classList.remove("d-none")
+	}
 
-		function ocultarError(){
-			loginAlert.classList.add("d-none")
-		}
+	function ocultarError(){
+		loginAlert.classList.add("d-none")
+	}
+
+function validarCampos(email, password, emailValido){
+	const errores = {}
+
+	if(email.trim() === "") errores.email = "Completa el email"
+	else if (!emailValido) errores.email = "Email no válido"
+	if (password === "") errores.password = "Completa la contraseña"
+
+	if(errores.email) inputEmail.focus()
+	else if (errores.password) inputPass.focus()
+
+	return errores
+}
 
 loginForm.addEventListener("submit", event => {
 	event.preventDefault()
@@ -34,6 +47,14 @@ loginForm.addEventListener("submit", event => {
 	inputPass.classList.remove("is-invalid")
 	ocultarError()
 
+	const errores = validarCampos(inputEmail.value, inputPass.value, inputEmail.checkValidity())
+	if (Object.keys(errores).length > 0) {
+		if (errores.email) inputEmail.classList.add("is-invalid")
+		if (errores.password)  inputPass.classList.add("is-invalid")
+
+		mostrarError(Object.values(errores)[0])
+		return
+	}
 	try{
 		const user = loguearUsuario(inputEmail.value, inputPass.value)
 
@@ -46,7 +67,9 @@ loginForm.addEventListener("submit", event => {
 		inputPass.classList.add("is-invalid")
 		mostrarError("No hemos podido iniciar sesión. El email o la contraseña no son correctos.")
 	} catch (error){
-		mostrarError("Fallo inesperado.")
+		console.error(error)
+		mostrarError("Recargue la página y pruebe de nuevo")
 	}
+
 
 })
