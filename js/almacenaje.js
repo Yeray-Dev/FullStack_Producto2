@@ -96,9 +96,6 @@ export function obtenerUsuarioActivo() {
 	return localStorage.getItem("usuarioActivo")
 }
 
-const CLAVE_USUARIOS = "usuarios"
-const CLAVE_USUARIO_ACTIVO = "usuarioActivo"
-const SIEMBRA = "flagSiembraObjecto"
 
 function guardarUsuarios(lista) {
 	try {
