@@ -5,9 +5,12 @@
  
  */
 
-export const exchanges = [
+const NOMBRE_BD = "tandem"
+const VERSION_BD = 2
+const TABLA = "intercambios"
+
+const exchanges = [
 	{
-		id: 1,
 		titulo: "Alemán nativo por español, quedamos a charlar",
 		email: "j@uni.es",
 		fecha: "2026-11-06",
@@ -20,7 +23,6 @@ export const exchanges = [
 		disponibilidad: "Tardes"
 	},
 	{
-		id: 2,
 		titulo: "Practicar inglés a cambio de catalán",
 		email: "aina@uni.es",
 		fecha: "2026-11-06",
@@ -33,7 +35,6 @@ export const exchanges = [
 		disponibilidad: "Fines de semana"
 	},
 	{
-		id: 3,
 		titulo: "Francés viendo series o paseando por el Retiro",
 		email: "camille@uni.es",
 		fecha: "2026-11-06",
@@ -46,7 +47,6 @@ export const exchanges = [
 		disponibilidad: "Mañanas"
 	},
 	{
-		id: 4,
 		titulo: "Japonés básico: busco conversación con nativos",
 		email: "diego@uni.es",
 		fecha: "2026-11-05",
@@ -59,7 +59,6 @@ export const exchanges = [
 		disponibilidad: "Noches"
 	},
 	{
-		id: 5,
 		titulo: "Italiano en un café semanal",
 		email: "marco@uni.es",
 		fecha: "2026-11-05",
@@ -72,7 +71,6 @@ export const exchanges = [
 		disponibilidad: "Mediodía"
 	},
 	{
-		id: 6,
 		titulo: "Portugués antes de mi viaje a Lisboa",
 		email: "sofia@uni.es",
 		fecha: "2026-11-04",
@@ -86,7 +84,7 @@ export const exchanges = [
 	},
 ]
 
-export const users = [
+const users = [
 	{ id: 1, name: "Jonas Keller", email: "j@uni.es", password: "1234", faculty: "Ingeniería Industrial", nativeLanguage: "de", role: "student", createdAt: "2026-09-22" },
 	{ id: 2, name: "Aina Puig", email: "aina@uni.es", password: "1234", faculty: "Filología", nativeLanguage: "ca", role: "student", createdAt: "2026-09-18" },
 	{ id: 3, name: "Camille Durand", email: "camille@uni.es", password: "1234", faculty: "Bellas Artes", nativeLanguage: "fr", role: "student", createdAt: "2026-09-15" },
@@ -100,6 +98,7 @@ export function obtenerUsuarioActivo() {
 
 const CLAVE_USUARIOS = "usuarios"
 const CLAVE_USUARIO_ACTIVO = "usuarioActivo"
+const SIEMBRA = "flagSiembraObjecto"
 
 function guardarUsuarios(lista) {
 	try {
@@ -174,9 +173,7 @@ export function cerrarSesion() {
 	localStorage.removeItem(CLAVE_USUARIO_ACTIVO)
 }
 
-const NOMBRE_BD = "tandem"
-const VERSION_BD = 2
-const TABLA = "intercambios"
+
 
 export function abrirBD() {
 	return new Promise((resolve, reject) => {
@@ -235,4 +232,21 @@ export async function borrarIntercambio(id) {
 		peticion.onsuccess = () => resolve()
 		peticion.onerror = () => reject(peticion.error)
 	})
+}
+
+export async function sembrarIntercambios() {
+	if (localStorage.getItem(SIEMBRA) !== null)
+		return
+	const bd = await abrirBD()
+	await new Promise((resolve, reject) => {
+		const transaccion = bd.transaction(TABLA, "readwrite")
+		const almacen = transaccion.objectStore(TABLA)
+		for (const elemento of exchanges ) {
+			almacen.add(elemento)
+		}
+		transaccion.oncomplete = () => resolve()
+		transaccion.onabort = () => reject(transaccion.error)
+		transaccion.onerror = () => reject(transaccion.error)
+	})
+	localStorage.setItem(SIEMBRA, "true")
 }
