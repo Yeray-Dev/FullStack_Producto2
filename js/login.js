@@ -34,9 +34,6 @@ function validarCampos(email, password, emailValido){
 	else if (!emailValido) errores.email = "Email no válido"
 	if (password === "") errores.password = "Completa la contraseña"
 
-	if(errores.email) inputEmail.focus()
-	else if (errores.password) inputPass.focus()
-
 	return errores
 }
 
@@ -51,6 +48,9 @@ loginForm.addEventListener("submit", event => {
 	if (Object.keys(errores).length > 0) {
 		if (errores.email) inputEmail.classList.add("is-invalid")
 		if (errores.password)  inputPass.classList.add("is-invalid")
+
+		if(errores.email) inputEmail.focus()
+		else if (errores.password) inputPass.focus()
 
 		mostrarError(Object.values(errores)[0])
 		return
