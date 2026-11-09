@@ -1,10 +1,11 @@
 import { languages, level, modality, type } from "./constantes.js"
 import { fillSelect, getLabel, showLoggedUser } from "./utils.js"
-import { sembrarIntercambios, obtenerIntercambios, obtenerUsuarios } from "./almacenaje.js"
+import { sembrarIntercambios, obtenerIntercambios, obtenerUsuarios, obtenerSeleccion, seleccionarIntercambio, deseleccionarIntercambio } from "./almacenaje.js"
 
 await sembrarIntercambios()
 const intercambios = await obtenerIntercambios()
 const usuarios = await obtenerUsuarios()
+const idSeleccion = await obtenerSeleccion()
 showLoggedUser(usuarios)
 
 const languageSelect = document.querySelector("#language-filter")
@@ -19,6 +20,11 @@ const selected = new Set()
 fillSelect(languageSelect, languages)
 fillSelect(levelSelect, level)
 fillSelect(modeSelect, modality)
+
+for (const id of idSeleccion){
+	selected.add(id)
+}
+
 
 function createCard(exchange) {
 	const card = cardTemplate.content.cloneNode(true)
@@ -98,15 +104,24 @@ for (const zone of [cardList, cardListFav]){
 		if (event.currentTarget.contains(event.relatedTarget))
 			return
 		event.currentTarget.classList.remove('active-zone')
-})
-	zone.addEventListener('drop', (event) => {
+	})
+
+	zone.addEventListener('drop', async (event) => {
 		event.preventDefault()
 		event.currentTarget.classList.remove('active-zone')
 		const id = Number(event.dataTransfer.getData('text/plain'))
-		if (event.currentTarget === cardListFav)
+		try {
+			if (event.currentTarget === cardListFav){
+			await seleccionarIntercambio(id)
 			selected.add(id)
-		else
-			selected.delete(id)
-		filterExchanges()
+			}
+			else{
+				await deseleccionarIntercambio(id)
+				selected.delete(id)
+			}
+			filterExchanges()
+		} catch (error){
+			console.error('No se pudo guardar la selección:', error)
+		}
 	})
 }

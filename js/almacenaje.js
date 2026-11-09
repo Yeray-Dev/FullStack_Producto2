@@ -6,8 +6,9 @@
  */
 
 const NOMBRE_BD = "tandem"
-const VERSION_BD = 2
+const VERSION_BD = 3
 const TABLA = "intercambios"
+const TABLA_SELECCION = "seleccion"
 const SIEMBRA = "flag-volcado-intercambios"
 const CLAVE_USUARIOS = "usuarios"
 const CLAVE_USUARIO_ACTIVO = "usuarioActivo"
@@ -185,6 +186,9 @@ export function abrirBD() {
 			if (evento.oldVersion < 1) {
 				bd.createObjectStore(TABLA, { keyPath: "id", autoIncrement: true })
 			}
+			if (!bd.objectStoreNames.contains(TABLA_SELECCION)) {
+				bd.createObjectStore(TABLA_SELECCION, { keyPath: "id", autoIncrement: false })
+			}
 		}
 
 		peticion.onsuccess = () => resolve(peticion.result)
@@ -217,6 +221,36 @@ export async function borrarIntercambio(id) {
 		peticion.onsuccess = () => resolve()
 		peticion.onerror = () => reject(peticion.error)
 	})
+}
+
+export async function obtenerSeleccion() {
+	const bd = await abrirBD()
+	return new Promise((resolve, reject) => {
+		const peticion = bd.transaction(TABLA_SELECCION, "readonly").objectStore(TABLA_SELECCION).getAllKeys()
+		peticion.onsuccess = () => resolve(peticion.result)
+		peticion.onerror = () => reject(peticion.error)
+	})
+
+}
+
+export async function seleccionarIntercambio(id) { 
+	const bd = await abrirBD()
+	return new Promise((resolve, reject) => {
+		const peticion = bd.transaction(TABLA_SELECCION, "readwrite").objectStore(TABLA_SELECCION).put({ id })
+		peticion.onsuccess = () => resolve(peticion.result)
+		peticion.onerror = () => reject(peticion.error)
+	})
+
+}
+
+export async function deseleccionarIntercambio(id) {
+	const bd = await abrirBD()
+	return new Promise((resolve, reject) => {
+		const peticion = bd.transaction(TABLA_SELECCION, "readwrite").objectStore(TABLA_SELECCION).delete(id)
+		peticion.onsuccess = () => resolve()
+		peticion.onerror = () => reject(peticion.error)
+	})
+
 }
 
 export async function sembrarIntercambios() {
