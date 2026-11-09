@@ -12,6 +12,9 @@ const levelSelect = document.querySelector("#level-filter")
 const modeSelect = document.querySelector("#modality-filter")
 const cardTemplate = document.querySelector("#card-template")
 const cardList = document.querySelector("#card-list")
+const cardListFav = document.querySelector("#card-list-fav")
+const pCardListFav = document.querySelector('#fav-empty')
+const selected = new Set()
 
 fillSelect(languageSelect, languages)
 fillSelect(levelSelect, level)
@@ -37,9 +40,14 @@ function createCard(exchange) {
 
 function renderCards(list) {
 	cardList.replaceChildren()
+	cardListFav.replaceChildren()
 	for (const exchange of list) {
-		cardList.append(createCard(exchange))
+		if (selected.has(exchange.id))
+			cardListFav.append(createCard(exchange))
+		else
+			cardList.append(createCard(exchange))
 	}
+	pClassListFav.toggle('d-none', selected.size !== 0)
 }
 
 function filterExchanges() {

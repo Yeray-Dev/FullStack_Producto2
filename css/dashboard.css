@@ -71,3 +71,25 @@
 	--bs-btn-hover-border-color: var(--type-text);
 	--bs-btn-hover-bg: var(--type-bg)
 }
+
+#card-list-fav {
+	display: flex;
+	min-height: 150px;
+	align-items: center;
+	text-align: center;
+	border: 2px dashed var(--bs-border-color);
+	border-radius: 0.5rem;
+}
+
+.card-zone > li {
+	cursor: grab;
+}
+.card-zone > li:active {
+	cursor: grabbing;
+}
+
+.dragging {
+	opacity: 0.4;
+}
+
+
