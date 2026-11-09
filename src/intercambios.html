@@ -4,7 +4,6 @@
 	1. "¿Cómo hago que la tabla se vea bien en móvil sin que se rompa el diseño?"
 	2. "¿Cómo distingo visualmente una oferta de una petición en la tabla?"
 	3. "¿Qué componentes de Bootstrap conviene usar para el formulario y por qué?"
-
 -->
 <html lang="es">
 
@@ -61,14 +60,11 @@
 				<span class="d-flex border rounded-5 shadow-sm p-2">
 					<span id="usuarioActivo" class="p-1 small">-no login-</span>
 				</span>
-				</span>
 				<a href="./login.html" class="btn btn-logout">
 					<i class="bi bi-box-arrow-right" aria-hidden="true"></i>
 					Salir
 				</a>
 			</div>
-
-		</div>
 		</div>
 	</header>
 
@@ -105,13 +101,47 @@
 					<textarea id="descripcion" class="form-control" rows="3" required></textarea>
 				</div>
 
-				<div class="mb-4">
+				<div class="mb-3">
 					<label for="tipo" class="form-label">Tipo</label>
 					<select id="tipo" class="form-select" required>
 						<option value="">Elige</option>
 						<option value="offer">Ofrezco idioma</option>
 						<option value="request">Busco idioma</option>
 					</select>
+				</div>
+
+				<div class="row g-3 mb-3">
+					<div class="col-md-4">
+						<label for="idioma" class="form-label">Idioma</label>
+						<select id="idioma" class="form-select" required>
+							<option value="">Elige</option>
+						</select>
+					</div>
+					<div class="col-md-4">
+						<label for="nivel" class="form-label">Nivel</label>
+						<select id="nivel" class="form-select" required>
+							<option value="">Elige</option>
+						</select>
+					</div>
+					<div class="col-md-4">
+						<label for="aCambioDe" class="form-label">A cambio de</label>
+						<select id="aCambioDe" class="form-select" required>
+							<option value="">Elige</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row g-3 mb-4">
+					<div class="col-md-6">
+						<label for="modalidad" class="form-label">Modalidad</label>
+						<select id="modalidad" class="form-select" required>
+							<option value="">Elige</option>
+						</select>
+					</div>
+					<div class="col-md-6">
+						<label for="disponibilidad" class="form-label">Disponibilidad</label>
+						<input type="text" id="disponibilidad" class="form-control" placeholder="Ej: Tardes" required>
+					</div>
 				</div>
 
 				<button type="submit" class="btn btn-dark w-100 py-2">Publicar</button>
@@ -140,8 +170,8 @@
 		<section class="card bg-white p-4">
 			<h2 class="fs-5 mb-3">Gráfico de intercambios</h2>
 			<div id="zona-grafico">
-			<canvas id="grafico" class="d-block"></canvas>
-</div>
+				<canvas id="grafico" class="d-block"></canvas>
+			</div>
 		</section>
 	</main>
 
