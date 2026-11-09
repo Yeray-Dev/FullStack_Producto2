@@ -78,6 +78,7 @@
 
 #card-list-fav {
 	border: 2px dashed var(--bs-border-color);
+	padding-bottom: var(--bs-gutter-y);
 	border-radius: 0.5rem;
 }
 

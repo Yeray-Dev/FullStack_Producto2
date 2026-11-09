@@ -95,12 +95,18 @@ for (const zone of [cardList, cardListFav]){
 	})
 
 	zone.addEventListener('dragleave', (event) => {
+		if (event.currentTarget.contains(event.relatedTarget))
+			return
 		event.currentTarget.classList.remove('active-zone')
-	})
-
+})
 	zone.addEventListener('drop', (event) => {
 		event.preventDefault()
 		event.currentTarget.classList.remove('active-zone')
-		console.log(event.dataTransfer.getData('text/plain'))
+		const id = Number(event.dataTransfer.getData('text/plain'))
+		if (event.currentTarget === cardListFav)
+			selected.add(id)
+		else
+			selected.delete(id)
+		filterExchanges()
 	})
 }
