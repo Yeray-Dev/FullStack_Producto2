@@ -2,12 +2,15 @@
  * Prompts (IA: Claude, Anthropic) Marc
  * 1. "como plantearias el manejo de errores respecto a lo desarollado"
  * 2. "como puedo ver y modificar a mano lo que hay guardado en localStorage desde las herramientas del navegador opera"
- 
+
  */
 
 const NOMBRE_BD = "tandem"
 const VERSION_BD = 2
 const TABLA = "intercambios"
+const SIEMBRA = "flag-volcado-intercambios"
+const CLAVE_USUARIOS = "usuarios"
+const CLAVE_USUARIO_ACTIVO = "usuarioActivo"
 
 const exchanges = [
 	{
@@ -93,7 +96,7 @@ const users = [
 
 
 export function obtenerUsuarioActivo() {
-	return localStorage.getItem("usuarioActivo")
+	return localStorage.getItem(CLAVE_USUARIO_ACTIVO)
 }
 
 
@@ -182,21 +185,6 @@ export function abrirBD() {
 			if (evento.oldVersion < 1) {
 				bd.createObjectStore(TABLA, { keyPath: "id", autoIncrement: true })
 			}
-
-			if (evento.oldVersion < 2) {
-				const tabla = peticion.transaction.objectStore(TABLA)
-				const hoy = new Date().toISOString().slice(0, 10)
-
-				for (const e of exchanges) {
-					tabla.add({
-						titulo: e.user.name + " · " + e.language.toUpperCase(),
-						email: users.find(u => u.name === e.user.name)?.email || "",
-						fecha: hoy,
-						descripcion: e.description,
-						tipo: e.type
-					})
-				}
-			}
 		}
 
 		peticion.onsuccess = () => resolve(peticion.result)
@@ -238,7 +226,7 @@ export async function sembrarIntercambios() {
 	await new Promise((resolve, reject) => {
 		const transaccion = bd.transaction(TABLA, "readwrite")
 		const almacen = transaccion.objectStore(TABLA)
-		for (const elemento of exchanges ) {
+		for (const elemento of exchanges) {
 			almacen.add(elemento)
 		}
 		transaccion.oncomplete = () => resolve()
