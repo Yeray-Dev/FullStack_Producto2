@@ -72,11 +72,11 @@
 	--bs-btn-hover-bg: var(--type-bg)
 }
 
-#card-list-fav {
-	display: flex;
+.card-zone {
 	min-height: 150px;
-	align-items: center;
-	text-align: center;
+}
+
+#card-list-fav {
 	border: 2px dashed var(--bs-border-color);
 	border-radius: 0.5rem;
 }
@@ -92,4 +92,12 @@
 	opacity: 0.4;
 }
 
+#card-list-fav.active-zone {
+	outline: 2px solid var(--bs-primary);
+	outline-offset: -2px;
+	border-radius: 0.5rem;
+}
 
+.active-zone > * {
+	pointer-events: none;
+}

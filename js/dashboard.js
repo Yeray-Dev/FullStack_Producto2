@@ -61,7 +61,7 @@ function renderCards(list) {
 		else
 			cardList.append(createCard(exchange))
 	}
-	pClassListFav.toggle('d-none', selected.size !== 0)
+	pCardListFav.classList.toggle('d-none', selected.size !== 0)
 }
 
 function filterExchanges() {
@@ -86,3 +86,21 @@ filterExchanges()
 
 const formFilter = document.getElementById('form-filter')
 formFilter.addEventListener('input', filterExchanges)
+
+for (const zone of [cardList, cardListFav]){
+	zone.addEventListener('dragover', (event) => {
+		event.preventDefault()
+		event.dataTransfer.dropEffect = 'move'
+		event.currentTarget.classList.add('active-zone')
+	})
+
+	zone.addEventListener('dragleave', (event) => {
+		event.currentTarget.classList.remove('active-zone')
+	})
+
+	zone.addEventListener('drop', (event) => {
+		event.preventDefault()
+		event.currentTarget.classList.remove('active-zone')
+		console.log(event.dataTransfer.getData('text/plain'))
+	})
+}
