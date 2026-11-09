@@ -6,7 +6,8 @@
  * 4. "Porque usar math? que diferencias hay?"
  */
 import * as almacenaje from "./almacenaje.js"
-import { formatDate } from "./utils.js"
+import { formatDate, fillSelect } from "./utils.js"
+import { languages, level, modality } from "./constantes.js"
 
 const formulario = document.querySelector("#exchange-form")
 const cuerpoTabla = document.querySelector("#exchange-table")
@@ -18,10 +19,16 @@ let ultimaLista = []
 
 const TIPOS = { offer: "Ofrezco idioma", request: "Busco idioma" }
 
+fillSelect(formulario.elements.idioma, languages)
+fillSelect(formulario.elements.nivel, level)
+fillSelect(formulario.elements.aCambioDe, languages)
+fillSelect(formulario.elements.modalidad, modality)
+
 
 function mostrarUsuarioActivo() {
 	const usuario = almacenaje.obtenerUsuarioActivo()
 	usuarioActivo.textContent = usuario || "-no login-"
+	if (usuario) formulario.elements.email.defaultValue = usuario
 }
 
 function mostrarError(texto) {
@@ -34,7 +41,14 @@ function validar(i) {
 	if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.email)) return "El email no es válido."
 	if (i.fecha === "") return "Elige una fecha."
 	if (i.descripcion === "") return "La descripción es obligatoria."
+	if (!almacenaje.obtenerUsuarios().some(u => u.email === i.email)) return "Ese email no pertenece a ningún usuario registrado."
 	if (i.tipo === "") return "Elige el tipo de intercambio."
+	if (i.idioma === "") return "Elige el idioma."
+	if (i.nivel === "") return "Elige el nivel."
+	if (i.aCambioDe === "") return "Elige el idioma que quieres a cambio."
+	if (i.idioma === i.aCambioDe) return "El idioma y el idioma a cambio no pueden ser el mismo."
+	if (i.modalidad === "") return "Elige la modalidad."
+	if (i.disponibilidad === "") return "Indica tu disponibilidad."
 	return ""
 }
 
@@ -93,6 +107,7 @@ function dibujarGrafico(lista) {
 
 async function consultarIntercambios() {
 	try {
+		await almacenaje.sembrarIntercambios()
 		const lista = await almacenaje.obtenerIntercambios()
 		listarIntercambios(lista)
 		dibujarGrafico(lista)
@@ -141,10 +156,15 @@ async function publicarIntercambio(event) {
 	const f = formulario.elements
 	const intercambio = {
 		titulo: f.titulo.value.trim(),
-		email: f.email.value.trim(),
+		email: f.email.value.trim().toLowerCase(),
 		fecha: f.fecha.value,
 		descripcion: f.descripcion.value.trim(),
-		tipo: f.tipo.value
+		tipo: f.tipo.value,
+		idioma: f.idioma.value,
+		nivel: f.nivel.value,
+		aCambioDe: f.aCambioDe.value,
+		modalidad: f.modalidad.value,
+		disponibilidad: f.disponibilidad.value.trim()
 	}
 
 	const error = validar(intercambio)
