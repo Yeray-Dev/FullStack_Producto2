@@ -23,6 +23,7 @@ fillSelect(modeSelect, modality)
 function createCard(exchange) {
 	const card = cardTemplate.content.cloneNode(true)
 	const usuario = usuarios.find(u => u.email === exchange.email)
+	const li = card.querySelector("li")
 
 	card.querySelector('[data-field="type"]').textContent = getLabel(type, exchange.tipo)
 	card.querySelector('[data-field="date"]').textContent = exchange.fecha
@@ -34,7 +35,20 @@ function createCard(exchange) {
 	card.querySelector('[data-field="availability"]').textContent = exchange.disponibilidad
 	card.querySelector('[data-field="user-name"]').textContent = usuario?.name ?? "Usuario eliminado"
 	card.querySelector('[data-field="faculty"]').textContent = usuario?.faculty ?? ""
-	card.querySelector("li").classList.add(exchange.tipo)
+	li.classList.add(exchange.tipo)
+
+	li.draggable = true
+	li.dataset.id = exchange.id
+
+	li.addEventListener('dragstart', (event) => {
+		event.dataTransfer.setData('text/plain', exchange.id)
+		event.dataTransfer.effectAllowed = 'move'
+		event.currentTarget.classList.add('dragging')
+	})
+
+	li.addEventListener('dragend', (event) => {
+		event.currentTarget.classList.remove('dragging')
+	})
 	return card
 }
 
