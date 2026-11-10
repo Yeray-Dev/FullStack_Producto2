@@ -1,5 +1,5 @@
 import { languages, level, modality, type } from "./constantes.js"
-import { fillSelect, getLabel, showLoggedUser } from "./utils.js"
+import { fillSelect, getLabel, mostrarUsuarioActivo, configurarCierreSesion  } from "./utils.js"
 import { sembrarIntercambios, obtenerIntercambios, obtenerUsuarios, obtenerSeleccion, seleccionarIntercambio, deseleccionarIntercambio } from "./almacenaje.js"
 
 const mensajeError = document.querySelector("#mensaje-error")
@@ -22,7 +22,8 @@ try {
 	console.error(error)
 	mostrarError("No se pudieron cargar los intercambios. Recarga la página.")
 }
-showLoggedUser(usuarios)
+mostrarUsuarioActivo()
+configurarCierreSesion()
 
 
 const languageSelect = document.querySelector("#language-filter")

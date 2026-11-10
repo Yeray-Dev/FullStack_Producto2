@@ -8,11 +8,11 @@
 import * as almacenaje from "./almacenaje.js"
 import { formatDate, fillSelect } from "./utils.js"
 import { languages, level, modality } from "./constantes.js"
+import { mostrarUsuarioActivo, configurarCierreSesion } from "./utils.js"
 
 const formulario = document.querySelector("#exchange-form")
 const cuerpoTabla = document.querySelector("#exchange-table")
 const mensajeError = document.querySelector("#mensaje-error")
-const usuarioActivo = document.querySelector("#usuarioActivo")
 const canvas = document.querySelector("#grafico")
 const zonaGrafico = document.querySelector("#zona-grafico")
 let ultimaLista = []
@@ -24,12 +24,6 @@ fillSelect(formulario.elements.nivel, level)
 fillSelect(formulario.elements.aCambioDe, languages)
 fillSelect(formulario.elements.modalidad, modality)
 
-
-function mostrarUsuarioActivo() {
-	const usuario = almacenaje.obtenerUsuarioActivo()
-	usuarioActivo.textContent = usuario || "-no login-"
-	if (usuario) formulario.elements.email.defaultValue = usuario
-}
 
 function mostrarError(texto) {
 	mensajeError.textContent = texto
@@ -203,4 +197,5 @@ window.addEventListener("resize", () => dibujarGrafico(ultimaLista))
 
 
 mostrarUsuarioActivo()
+configurarCierreSesion()
 consultarIntercambios()

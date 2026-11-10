@@ -1,5 +1,5 @@
 import { loguearUsuario } from "./almacenaje.js"
-
+import {  mostrarUsuarioActivo, configurarCierreSesion } form "./utils.js"
 
 const loginForm = document.getElementById("login-form")
 const inputEmail = document.getElementById("email")
@@ -70,6 +70,7 @@ loginForm.addEventListener("submit", event => {
 		console.error(error)
 		mostrarError("Recargue la página y pruebe de nuevo")
 	}
-
-
 })
+
+mostrarUsuarioActivo()
+configurarCierreSesion()

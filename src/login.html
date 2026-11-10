@@ -11,6 +11,50 @@
     <title>Login</title>
 </head>
 <body>
+	<header class="navbar navbar-expand-lg sticky-top bg-white border-bottom">
+		<div class="container-fluid px-4">
+			<a class="navbar-brand d-flex align-items-center gap-2" href="dashboard.html">
+				<img src="../media/logo.svg" alt="" width="28" height="28">
+				Tándem
+			</a>
+			<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#mainMenu"
+					aria-controls="mainMenu"
+					aria-expanded="false"
+					aria-label="Abrir menu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div id="mainMenu" class="collapse navbar-collapse">
+				<nav class="ms-lg-5">
+					<ul class="navbar-nav gap-lg-3">
+						<li class="nav-item"><a class="nav-link" href="dashboard.html">
+							<i class="bi bi-grid-1x2" aria-hidden="true"></i>
+								Tablón
+							</a></li>
+						<li class="nav-item"><a class="nav-link" href="intercambios.html">
+							<i class="bi bi-arrow-left-right" aria-hidden="true"></i>
+								Intercambios
+							</a></li>
+						<li class="nav-item"><a class="nav-link active" href="usuarios.html" aria-current="page">
+							<i class="bi bi-people" aria-hidden="true"></i>
+								Usuarios
+							</a></li>
+					</ul>
+				</nav>
+			<div class="d-flex ms-lg-auto align-items-center gap-lg-3">
+										<span class="d-flex align-items-center border rounded-5 shadow-sm p-2">
+						<span id="active-user-initials" class="p-1 bg-black text-white rounded-circle">?</span>
+						<span id="usuarioActivo" class="p-1 small">-no login-</span>
+					</span>
+					<a id="logout-link" href="./login.html" class="btn btn-logout">
+						<i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+						Salir
+					</a>
+				</div>	
+			</div>
+		</div>
+	</header>
     <main class="container-fluid">
         <div class="row vh-100">
             <aside id="brand-pannel" class="col-lg-6 d-none d-lg-flex flex-column p-5">

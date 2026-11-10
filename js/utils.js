@@ -1,3 +1,5 @@
+import { obtenerUsuarioActivo, obtenerUsuarios, cerrarSesion } from "./almacenaje.js"
+
 export function fillSelect(select, options) {
 	for (const arrOption of options) {                     // Por cada dato...
 		const newOption = document.createElement("option") // Creamos una opción vacía
@@ -49,4 +51,27 @@ export function showLoggedUser(users) {
 	document.querySelector("#user-email").textContent = user.email
 	document.querySelector("#user-chip").classList.remove("d-none")
 	return user
+}
+
+export function mostrarUsuarioActivo() {
+	const nombre = document.querySelector("#usuarioActivo")
+	const iniciales = document.querySelector("#active-user-initials")
+	let usuario = null
+
+	try {
+		const email = (obtenerUsuarioActivo() ?? "").toLowerCase()
+		usuario = obtenerUsuarios().find(u => u.email.toLowerCase() === email) ?? null
+	} catch (error) {
+		console.error(error)
+	}
+
+	nombre.textContent = usuario ? usuario.name : "-no login-"
+	iniciales.textContent = usuario ? getInitials(usuario.name) : "?"
+	return usuario
+}
+
+export function configurarCierreSesion() {
+	document.querySelector("#logout-link").addEventListener("click", () => {
+		cerrarSesion()
+	})
 }

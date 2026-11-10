@@ -6,7 +6,8 @@
 
 import { languages, roles } from "./constantes.js"
 import * as almacenaje from "./almacenaje.js"
-import { fillSelect, getLabel, getInitials, formatDate } from "./utils.js"
+import { fillSelect, getLabel, getInitials, formatDate, mostrarUsuarioActivo, configurarCierreSesion } from "./utils.js"
+
 
 const userForm = document.querySelector("#user-form")
 const nameInput = document.querySelector("#user-name")
@@ -26,9 +27,6 @@ const deleteEmail = document.querySelector("#delete-email")
 const confirmDeleteButton = document.querySelector("#confirm-delete")
 const deleteModal = bootstrap.Modal.getOrCreateInstance("#delete-modal")
 const searchInput = document.querySelector("#user-search")
-const activeUserName = document.querySelector("#usuarioActivo")
-const activeUserInitials = document.querySelector("#active-user-initials")
-const logoutLink = document.querySelector("#logout-link")
 const toastIcon = document.querySelector("#user-toast .toast-icon")
 
 let users = []
@@ -224,4 +222,5 @@ logoutLink.addEventListener("click", () => {
 
 loadUsers()
 renderUsers(users)
-showActiveUser()
+mostrarUsuarioActivo()
+configurarCierreSesion()
