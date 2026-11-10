@@ -13,13 +13,13 @@
 <body>
     <main class="container-fluid">
         <div class="row vh-100">
-            <aside id="brand-pannel" class="col lg-6 d-none d-lg-flex flex-column p-5">
+            <aside id="brand-pannel" class="col-lg-6 d-none d-lg-flex flex-column p-5">
                 <div class="d-flex align-items-center gap-2">
                     <img src="../media/logo.svg" alt="logotipo">
                     <p class="text-white m-0">Tándem</p>
                 </div>
                 <div class="my-auto">
-                    <p class="display-3 fw-bold 1h-1 text-white">
+                    <p class="display-3 fw-bold lh-1 text-white">
                         Tú enseñas <br> el tuyo. <br>
                         Yo, el mío.
                     </p>
@@ -37,7 +37,8 @@
                     <p>
                         Usa tu email universitario.
                     </p>
-                    <form id="login-form">
+                    <div id="login-alert" class="alert alert-danger d-none" role="alert"></div>
+                    <form id="login-form" novalidate>
                         <div class="d-flex row">
                             <label for="email" class="form-label">Email</label>
                             <div class="input-group">

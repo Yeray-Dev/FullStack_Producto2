@@ -1,4 +1,5 @@
-import { users } from "./datos.js"
+import { loguearUsuario } from "./almacenaje.js"
+
 
 const loginForm = document.getElementById("login-form")
 const inputEmail = document.getElementById("email")
@@ -14,24 +15,61 @@ buttonEye.addEventListener("click", () => {
 	buttonEye.setAttribute("aria-label", visible ? "Mostrar contraseña" : "Ocultar contraseña")
 })
 
+
+const loginAlert = document.getElementById("login-alert")
+
+	function mostrarError(mensaje) {
+		loginAlert.textContent = mensaje
+		loginAlert.classList.remove("d-none")
+	}
+
+	function ocultarError(){
+		loginAlert.classList.add("d-none")
+	}
+
+function validarCampos(email, password, emailValido){
+	const errores = {}
+
+	if(email.trim() === "") errores.email = "Completa el email"
+	else if (!emailValido) errores.email = "Email no válido"
+	if (password === "") errores.password = "Completa la contraseña"
+
+	return errores
+}
+
 loginForm.addEventListener("submit", event => {
 	event.preventDefault()
 
 	inputEmail.classList.remove("is-invalid")
 	inputPass.classList.remove("is-invalid")
+	ocultarError()
 
-	const email = inputEmail.value.trim().toLowerCase()
-	const password = inputPass.value
-	const user = users.find(u => u.email.toLowerCase() === email && u.password === password)
+	const errores = validarCampos(inputEmail.value, inputPass.value, inputEmail.checkValidity())
+	if (Object.keys(errores).length > 0) {
+		if (errores.email) inputEmail.classList.add("is-invalid")
+		if (errores.password)  inputPass.classList.add("is-invalid")
 
-	if (user) {
-		window.location.href = "dashboard.html?email=" + encodeURIComponent(user.email)
+		if(errores.email) inputEmail.focus()
+		else if (errores.password) inputPass.focus()
+
+		mostrarError(Object.values(errores)[0])
 		return
 	}
+	try{
+		const user = loguearUsuario(inputEmail.value, inputPass.value)
 
-	const emailExists = users.some(u => u.email.toLowerCase() === email)
-	if (!emailExists)
+		if (user) {
+			window.location.href = "dashboard.html"
+			return
+		}
+
 		inputEmail.classList.add("is-invalid")
-	inputPass.classList.add("is-invalid")
-})
+		inputPass.classList.add("is-invalid")
+		mostrarError("No hemos podido iniciar sesión. El email o la contraseña no son correctos.")
+	} catch (error){
+		console.error(error)
+		mostrarError("Recargue la página y pruebe de nuevo")
+	}
 
+
+})
