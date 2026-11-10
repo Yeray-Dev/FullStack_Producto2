@@ -4,6 +4,13 @@
  * 2. "como puedo ver y modificar a mano lo que hay guardado en localStorage desde las herramientas del navegador opera"
 
  */
+/*
+ * Prompts (IA: Claude, Anthropic) Yeray
+ * 1. "tengo que pasar datos.js a almacenaje.js, ¿las constantes de idiomas, nivel, modalidad, tipo y roles van tal cual o datos.js tiene que desaparecer?"
+ * 2. "¿dónde se usa localStorage? ¿cómo estructuro exchanges y users para que persistan?"
+ * 3. "formatea este intercambio a la versión que coincida con la de IndexedDB"
+ * 4. "he borrado la base de datos pero la flag de siembra sigue activada, ¿cómo la reinicio?"
+ */
 
 const NOMBRE_BD = "tandem"
 const VERSION_BD = 3

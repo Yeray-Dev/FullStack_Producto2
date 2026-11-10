@@ -1,3 +1,10 @@
+/*
+ * Prompts (IA: Claude, Anthropic) Yeray
+ * 1. "¿cómo diferencio visualmente la zona de favoritos de la zona común?"
+ * 2. "¿cómo hago que la tarjeta se vea atenuada mientras la arrastro?"
+ * 3. "¿cómo resalto la zona de destino al arrastrar sobre ella sin que los hijos disparen dragleave?"
+ * 4. "¿cómo garantizo una altura mínima para poder soltar tarjetas en una zona vacía?"
+ */
 .btn-logout {
 	--bs-btn-color: var(--color-muted);
 	--bs-btn-border-color: var(--color-border);

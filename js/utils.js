@@ -1,3 +1,8 @@
+/*
+ * Prompts (IA: Claude, Anthropic) Yeray
+ * 1. "¿por qué en usuarios se muestra el usuario activo pero si muevo esas funciones a utils.js dejan de funcionar?"
+ */
+
 import { obtenerUsuarioActivo, obtenerUsuarios, cerrarSesion } from "./almacenaje.js"
 
 export function fillSelect(select, options) {

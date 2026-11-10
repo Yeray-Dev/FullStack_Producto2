@@ -1,3 +1,11 @@
+/*
+ * Prompts (IA: Claude, Anthropic) Yeray
+ * 1. "¿qué necesito y qué pasos debo seguir para que el dashboard cargue los intercambios desde IndexedDB con async/await?"
+ * 2. "quiero usar la API Drag and Drop con un contenedor de intercambios y otro de favoritos, ¿cómo lo planteo?"
+ * 3. "¿cómo guardo la selección de favoritos para que persista al recargar la página?"
+ * 4. "dame el bloque de código para mostrar un aviso al usuario si falla la carga o el guardado, y dónde va"
+ */
+
 import { languages, level, modality, type } from "./constantes.js"
 import { fillSelect, getLabel, mostrarUsuarioActivo, configurarCierreSesion  } from "./utils.js"
 import { sembrarIntercambios, obtenerIntercambios, obtenerUsuarios, obtenerSeleccion, seleccionarIntercambio, deseleccionarIntercambio } from "./almacenaje.js"
