@@ -2,11 +2,28 @@ import { languages, level, modality, type } from "./constantes.js"
 import { fillSelect, getLabel, showLoggedUser } from "./utils.js"
 import { sembrarIntercambios, obtenerIntercambios, obtenerUsuarios, obtenerSeleccion, seleccionarIntercambio, deseleccionarIntercambio } from "./almacenaje.js"
 
-await sembrarIntercambios()
-const intercambios = await obtenerIntercambios()
-const usuarios = await obtenerUsuarios()
-const idSeleccion = await obtenerSeleccion()
+const mensajeError = document.querySelector("#mensaje-error")
+
+function mostrarError(texto) {
+	mensajeError.textContent = texto
+	mensajeError.classList.toggle("d-none", texto === "")
+}
+
+let intercambios = []
+let usuarios = []
+let idSeleccion = []
+
+try {
+	await sembrarIntercambios()
+	intercambios = await obtenerIntercambios()
+	usuarios = await obtenerUsuarios()
+	idSeleccion = await obtenerSeleccion()
+} catch (error) {
+	console.error(error)
+	mostrarError("No se pudieron cargar los intercambios. Recarga la página.")
+}
 showLoggedUser(usuarios)
+
 
 const languageSelect = document.querySelector("#language-filter")
 const levelSelect = document.querySelector("#level-filter")
@@ -31,6 +48,7 @@ function createCard(exchange) {
 	const usuario = usuarios.find(u => u.email === exchange.email)
 	const li = card.querySelector("li")
 
+	card.querySelector('[data-field="title"]').textContent = exchange.titulo
 	card.querySelector('[data-field="type"]').textContent = getLabel(type, exchange.tipo)
 	card.querySelector('[data-field="date"]').textContent = exchange.fecha
 	card.querySelector('[data-field="language"]').textContent = getLabel(languages, exchange.idioma)
@@ -112,16 +130,17 @@ for (const zone of [cardList, cardListFav]){
 		const id = Number(event.dataTransfer.getData('text/plain'))
 		try {
 			if (event.currentTarget === cardListFav){
-			await seleccionarIntercambio(id)
-			selected.add(id)
+				await seleccionarIntercambio(id)
+				selected.add(id)
 			}
 			else{
 				await deseleccionarIntercambio(id)
 				selected.delete(id)
 			}
+			mostrarError("")  // NUEVO: borra un aviso anterior
 			filterExchanges()
 		} catch (error){
 			console.error('No se pudo guardar la selección:', error)
-		}
-	})
+			mostrarError("No se pudo guardar la selección.")  // NUEVO
+		}	})
 }

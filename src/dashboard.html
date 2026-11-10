@@ -68,7 +68,7 @@
 			</div>
 			<a href="./intercambios.html" class="btn btn-dark py-2 px-3 mt-auto rounded-3 bi-plus-lg">Publicar intercambio</a>
 		</header>
-
+		<div id="mensaje-error" class="alert alert-danger d-none" role="alert"></div>
 		<search class="p-1 my-3  border rounded-3 bg-white">
 			<form class="d-lg-flex align-items-center gap-lg-3" id="form-filter">
 				<fieldset class="type-filter p-2" role="group">
@@ -144,7 +144,6 @@
 							<time data-field="date" class="text-body-secondary small"></time>
 						</div>
 						<h2 class="mt-2">
-							<span data-field="title"></span> <!-- PROVISIONAL -->
 							<span data-field="language"></span>
 							<span data-field="level" class="ms-2"></span>
 						</h2>
@@ -152,6 +151,7 @@
 
 					<div class="card-body">
 						<p class="text-body-secondary small mb-0 pb-3 bi bi-arrow-left-right"> A cambio de <strong data-field="exchange" class="fw-bold fs-6 text-black"></strong></p>
+						<span data-field="title" class="mb-4"></span> <!-- PROVISIONAL -->
 						<p data-field="description" class="me-1"></p>
 						<p>
 							<span data-field="modality" class="bi bi-geo-alt pe-3 text-body-secondary small"></span>
