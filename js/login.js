@@ -1,5 +1,5 @@
 import { loguearUsuario } from "./almacenaje.js"
-import {  mostrarUsuarioActivo, configurarCierreSesion } form "./utils.js"
+import { mostrarUsuarioActivo, configurarCierreSesion } from "./utils.js"
 
 const loginForm = document.getElementById("login-form")
 const inputEmail = document.getElementById("email")

@@ -47,13 +47,6 @@ function loadUsers() {
 	}
 }
 
-function showActiveUser() {
-	const email = almacenaje.obtenerUsuarioActivo()
-	const user = users.find(user => user.email === email)
-
-	activeUserName.textContent = user ? user.name : "-no login-"
-	activeUserInitials.textContent = user ? getInitials(user.name) : "?"
-}
 
 function createRow(user) {
 	const row = rowTemplate.content.cloneNode(true)
@@ -216,9 +209,6 @@ searchInput.addEventListener("input", () => {
 	renderUsers(getVisibleUsers())
 })
 
-logoutLink.addEventListener("click", () => {
-	almacenaje.cerrarSesion()
-})
 
 loadUsers()
 renderUsers(users)
